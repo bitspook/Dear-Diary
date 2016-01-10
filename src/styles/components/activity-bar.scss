@@ -1,6 +1,7 @@
 @import '../_icons.scss';
 
 $activity-bar-width: 50px;
+$color-primary: #0D9DE7;
 $color-activity-bar-bg: #222;
 $color-item: #aaa;
 $color-item-hover: #fff;
@@ -46,6 +47,17 @@ $item-height: 20;
     }
 }
 
+.activity-active {
+    &::after {
+        content: '';
+        width: $activity-bar-width + 2px;
+        height: $item-height * 1.8 + px;
+        background: rgba(13, 157, 231, 0.2);
+        border-bottom: 4px solid $color-primary;
+        position: absolute;
+    }
+}
+
 .tool-tip {
     position: absolute;
     min-width: 60px;
@@ -60,6 +72,7 @@ $item-height: 20;
     visibility: hidden;
     display: inline;
     opacity: 0;
+    z-index: 9999;
 
     &::before {
         content: '';
@@ -82,10 +95,17 @@ $item-height: 20;
 
     composes: activity;
 }
+.new-entry-active {
+    composes: new-entry activity-active;
+}
 
 .all-entries {
     @include activity-position(1);
     @include icon-list-ul($color-item, $color-item-hover);
 
     composes: activity;
+}
+
+.all-entries-active {
+    composes: all-entries activity-active;
 }

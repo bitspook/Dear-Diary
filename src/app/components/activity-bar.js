@@ -9,7 +9,7 @@ class ActivityBar extends Component {
         return (
             <div styleName='activity-bar'>
                 <div styleName='activities'>
-                    <i styleName='new-entry'>
+                    <i styleName='new-entry-active'>
                         <span styleName='tool-tip'>New Entry</span>
                     </i>
                     <i styleName='all-entries'>

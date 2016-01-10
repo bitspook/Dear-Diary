@@ -79,6 +79,15 @@ p {
   transition: all 0.6s ease;
 }
 
+.activity-bar__activity-active___KOQfG::after {
+  content: '';
+  width: 52px;
+  height: 36px;
+  background: rgba(13, 157, 231, 0.2);
+  border-bottom: 4px solid #0D9DE7;
+  position: absolute;
+}
+
 .activity-bar__tool-tip___3CRQo {
   position: absolute;
   min-width: 60px;
@@ -93,6 +102,7 @@ p {
   visibility: hidden;
   display: inline;
   opacity: 0;
+  z-index: 9999;
 }
 
 .activity-bar__tool-tip___3CRQo::before {
@@ -120,6 +130,9 @@ p {
   background-size: contain;
 }
 
+.activity-bar__new-entry-active___2ahKT {
+}
+
 .activity-bar__all-entries___Gc327 {
   top: 50px;
   background: url('data:image/svg+xml;utf8,<svg fill="#aaa" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>') no-repeat;
@@ -129,4 +142,7 @@ p {
 .activity-bar__all-entries___Gc327:hover {
   background: url('data:image/svg+xml;utf8,<svg fill="#fff" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>') no-repeat;
   background-size: contain;
+}
+
+.activity-bar__all-entries-active___1B8Ab {
 }
