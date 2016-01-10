@@ -15,32 +15,26 @@ p {
 
 .app__header___23Xud {
   color: red;
-}html,
-body,
-div,
-span,
-h1,
-h2,
-h3,
-p {
-  padding: 0;
-  margin: 0;
-  font-family: sans-serif;
-}
-
-.editor__Edit-page___12e97 {
+}.editor__edit-page___27nWr {
   padding-top: 10px;
   padding-left: 80px;
   padding-bottom: 10px;
   padding-right: 10px;
 }
 
-.editor__date-field___3c9BG {
+.editor__entry-date___1Gecm {
   width: 200px;
   height: 30px;
   padding: 5px;
   font-weight: bold;
   margin-top: 20px;
+  border: none;
+  font-size: 18px;
+  outline: none;
+}
+
+.editor__preview-button___3klVA {
+  float: right;
 }
 
 .editor__text-field___RjZyI {

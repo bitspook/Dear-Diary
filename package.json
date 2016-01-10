@@ -33,6 +33,7 @@
     "write-file-webpack-plugin": "^2.1.2"
   },
   "dependencies": {
+    "moment": "^2.11.1",
     "react": "^0.14.6",
     "react-css-modules": "^3.6.4",
     "react-dom": "^0.14.6"
