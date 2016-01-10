@@ -1,0 +1,68 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.app__header___3kY3Z {
+  color: red;
+}
+
+.app__nav-bar___1VGE0 {
+  width: 50px;
+  height: 500px;
+  background-color: #E2DEDE;
+  float: left;
+}
+
+.app__nav-bar-menu___33RsX {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 0px;
+  cursor: pointer;
+}
+
+.app__nav-bar-menu___33RsX:hover {
+  background-color: white;
+}html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+p {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.editor__Edit-page___2bt7y {
+  padding-top: 10px;
+  padding-left: 80px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+.editor__date-field___3Q6JR {
+  width: 200px;
+  height: 30px;
+  padding: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.editor__text-field___1rf5S {
+  width: 90%;
+  height: 390px;
+  margin-top: 10px;
+  padding: 10px;
+}
