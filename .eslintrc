@@ -11,6 +11,8 @@
             2,
             "always"
         ],
-        "id-length": 0
+        "id-length": 0,
+        "jsx-quotes": [2, "prefer-single"],
+        "new-cap": 0
     }
 }

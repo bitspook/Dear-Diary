@@ -5,33 +5,16 @@ span,
 h1,
 h2,
 h3,
+ul,
+li,
 p {
   padding: 0;
   margin: 0;
   font-family: sans-serif;
 }
 
-.app__header___3kY3Z {
+.app__header___23Xud {
   color: red;
-}
-
-.app__nav-bar___1VGE0 {
-  width: 50px;
-  height: 500px;
-  background-color: #E2DEDE;
-  float: left;
-}
-
-.app__nav-bar-menu___33RsX {
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-right: 0px;
-  cursor: pointer;
-}
-
-.app__nav-bar-menu___33RsX:hover {
-  background-color: white;
 }html,
 body,
 div,
@@ -45,14 +28,14 @@ p {
   font-family: sans-serif;
 }
 
-.editor__Edit-page___2bt7y {
+.editor__Edit-page___12e97 {
   padding-top: 10px;
   padding-left: 80px;
   padding-bottom: 10px;
   padding-right: 10px;
 }
 
-.editor__date-field___3Q6JR {
+.editor__date-field___3c9BG {
   width: 200px;
   height: 30px;
   padding: 5px;
@@ -60,9 +43,90 @@ p {
   margin-top: 20px;
 }
 
-.editor__text-field___1rf5S {
+.editor__text-field___RjZyI {
   width: 90%;
   height: 390px;
   margin-top: 10px;
   padding: 10px;
+}.activity-bar__activity-bar___3O1kc {
+  position: relative;
+  width: 50px;
+  height: 100vh;
+  background-color: #222;
+  float: left;
+}
+
+.activity-bar__activity___1J-ei {
+  position: absolute;
+  height: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.activity-bar__activity___1J-ei::after {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #3a3a3a;
+  position: absolute;
+  bottom: -10px;
+  left: -15px;
+}
+
+.activity-bar__activity___1J-ei:hover > .activity-bar__tool-tip___3CRQo {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.6s ease;
+}
+
+.activity-bar__tool-tip___3CRQo {
+  position: absolute;
+  min-width: 60px;
+  width: auto;
+  font-size: 12px;
+  left: 40px;
+  background: #3a3a3a;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  font-style: normal;
+  visibility: hidden;
+  display: inline;
+  opacity: 0;
+}
+
+.activity-bar__tool-tip___3CRQo::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 2px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #3a3a3a;
+}
+
+.activity-bar__activities___1xW8z {
+  padding: 10px 0;
+  padding-left: 13px;
+}
+
+.activity-bar__new-entry___8d9Hl {
+  background: url('data:image/svg+xml;utf8,<svg fill="#aaa" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1596 380q28 28 48 76t20 88v1152q0 40-28 68t-68 28h-1344q-40 0-68-28t-28-68v-1600q0-40 28-68t68-28h896q40 0 88 20t76 48zm-444-244v376h376q-10-29-22-41l-313-313q-12-12-41-22zm384 1528v-1024h-416q-40 0-68-28t-28-68v-416h-768v1536h1280z"/></svg>') no-repeat;
+  background-size: contain;
+}
+
+.activity-bar__new-entry___8d9Hl:hover {
+  background: url('data:image/svg+xml;utf8,<svg fill="#fff" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1596 380q28 28 48 76t20 88v1152q0 40-28 68t-68 28h-1344q-40 0-68-28t-28-68v-1600q0-40 28-68t68-28h896q40 0 88 20t76 48zm-444-244v376h376q-10-29-22-41l-313-313q-12-12-41-22zm384 1528v-1024h-416q-40 0-68-28t-28-68v-416h-768v1536h1280z"/></svg>') no-repeat;
+  background-size: contain;
+}
+
+.activity-bar__all-entries___Gc327 {
+  top: 50px;
+  background: url('data:image/svg+xml;utf8,<svg fill="#aaa" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>') no-repeat;
+  background-size: contain;
+}
+
+.activity-bar__all-entries___Gc327:hover {
+  background: url('data:image/svg+xml;utf8,<svg fill="#fff" width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>') no-repeat;
+  background-size: contain;
 }

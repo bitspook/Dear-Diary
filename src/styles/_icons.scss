@@ -1,0 +1,33 @@
+@function str-replace($string, $search, $replace: '') {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@function svg-fill ($svg, $color) {
+    @return str-replace($svg, '<svg', '<svg fill="#{$color}"');
+}
+
+@mixin icon($icon-svg, $icon-color, $icon-color-hover) {
+    background: url('data:image/svg+xml;utf8,#{svg-fill($icon-svg, $icon-color)}') no-repeat;
+    background-size: contain;
+
+    &:hover {
+        background: url('data:image/svg+xml;utf8,#{svg-fill($icon-svg, $icon-color-hover)}') no-repeat;
+        background-size: contain;
+    }
+}
+
+@mixin icon-file-o($color, $color-hover) {
+    $icon-svg: '<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1596 380q28 28 48 76t20 88v1152q0 40-28 68t-68 28h-1344q-40 0-68-28t-28-68v-1600q0-40 28-68t68-28h896q40 0 88 20t76 48zm-444-244v376h376q-10-29-22-41l-313-313q-12-12-41-22zm384 1528v-1024h-416q-40 0-68-28t-28-68v-416h-768v1536h1280z"/></svg>';
+    @include icon($icon-svg, $color, $color-hover);
+}
+
+@mixin icon-list-ul($color, $color-hover) {
+    $icon-svg: '<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M384 1408q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm0-512q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm-1408-928q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm1408 416v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5zm0-512v192q0 13-9.5 22.5t-22.5 9.5h-1216q-13 0-22.5-9.5t-9.5-22.5v-192q0-13 9.5-22.5t22.5-9.5h1216q13 0 22.5 9.5t9.5 22.5z"/></svg>';
+    @include icon($icon-svg, $color, $color-hover);
+}
