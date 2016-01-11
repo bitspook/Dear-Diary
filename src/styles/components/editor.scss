@@ -1,28 +1,48 @@
+@import '../_icons.scss';
+
 .edit-page {
-	padding-top:10px;
-	padding-left: 80px;
-	padding-bottom: 10px;
-	padding-right: 10px;
+	  padding-top:10px;
+	  padding-left: 120px;
+	  padding-bottom: 10px;
+	  padding-right: 10px;
 }
 
 .entry-date {
-	width: 200px;
-	height: 30px;
-	padding: 5px;
-	font-weight: bold;
-	margin-top: 20px;
-  border: none;
-  font-size: 18px;
-  outline: none;
+    padding: 50px 0;
+
+    & > div {
+        display: inline-block;
+    }
 }
 
-.preview-button {
-    float: right;
+.visible-date {
+	  width: 200px;
+    padding-right: 10px;
+	  height: 30px;
+	  font-weight: bold;
+	  margin-top: 20px;
+    border: none;
+    font-size: 22px;
+    outline: none;
+    font-family: 'Roboto';
+    vertical-align: text-bottom;
+}
+
+.edit-date {
+    @include icon-pencil(#222, #444);
+
+    width: 17px;
+    height: 17px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: transparent;
+    vertical-align: super;
 }
 
 .text-field {
-	width: 90%;
-	height: 390px;
-	margin-top: 10px;
-	padding: 10px;
+	  width: 90%;
+	  height: 390px;
+	  margin-top: 10px;
+	  padding: 10px;
 }

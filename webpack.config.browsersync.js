@@ -76,7 +76,17 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url')
+                loader: ExtractTextPlugin.extract('style', 'css!resolve-url'),
+                include: [
+                        /node_modules/
+                ]
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url'),
+                exclude: [
+                        /node_modules/
+                ]
             },
             {
                 test: /\.scss$/,

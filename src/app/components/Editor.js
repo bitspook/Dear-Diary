@@ -4,8 +4,15 @@ import React, {
 import CSSModules from 'react-css-modules';
 import moment from 'moment';
 import styles from '../../styles/components/editor.scss';
+import DatePicker from 'react-datepicker';
+
+import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
 
 class Editor extends Component {
+    handleDateChange = () => {
+        return false;
+    };
+
     render() {
         let currentDate;
 
@@ -13,9 +20,14 @@ class Editor extends Component {
 
         return (
             <div styleName='edit-page'>
-                <div>
-                    <input type='text' styleName='entry-date' defaultValue={currentDate} />
-                    <input styleName='preview-button' type='button' value='Preview' />
+                <div styleName='entry-date'>
+                    <span styleName='visible-date'>{currentDate}</span>
+
+                    <DatePicker
+                        styleName='edit-date'
+                        popoverTargetOffset='10px -125px'
+                        onChange={this.handleDateChange}
+                    />
                 </div>
 
                 <div >
