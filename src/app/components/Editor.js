@@ -29,6 +29,7 @@ class Editor extends Component {
 
                     <DatePicker
                         styleName='edit-date'
+                        popoverTargetOffset='10px 25px'
                         onChange={this.handleDateChange}
                     />
                 </div>
@@ -36,10 +37,13 @@ class Editor extends Component {
                 <div >
                     <MediumEditor
                         tag='pre'
-                        styleName='text-field'
+                        styleName='edit-entry'
                         options={{
                             placeholder: {
-                                text: 'Hello you fucking cunt!',
+                                text: 'Dear Diary,',
+                            },
+                            toolbar: {
+                                buttons: ['bold', 'italic', 'strikethrough', 'h2', 'h3', 'removeFormat'],
                             },
                         }}
                     />

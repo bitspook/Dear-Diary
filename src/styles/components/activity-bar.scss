@@ -13,7 +13,7 @@ $item-height: 20;
 }
 
 .activity-bar {
-    position: relative;
+    position: fixed;
     width: $activity-bar-width;
     height: 100vh;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAYAAAAx8TU7AAAAH0lEQVQIW2NkgIK5Jib1yWfONIK4jFQShBmDYiZ5ggC8RRAJZLvlpgAAAABJRU5ErkJggg==) repeat-y;

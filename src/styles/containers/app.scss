@@ -11,6 +11,7 @@ h2,
 h3,
 ul,
 li,
+pre,
 p {
 	padding: 0;
 	margin: 0;
@@ -19,8 +20,9 @@ p {
 
 .app {
     position: relative;
-	  font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     width: 100%;
+    background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYV2NcvHixJAMRgJEqCmNjY5/DDMJrItEKkZ1OHTcSNBHZbTA2VquRFcJMxelGdMUAJX0sH8nvRc0AAAAASUVORK5CYII=");
 }
 
 .content {
@@ -29,10 +31,6 @@ p {
     width: 80%;
     max-width: 980px;
     height: 100vh;
-
-    p {
-        font-family: 'Roboto';
-    }
 }
 
 .header {

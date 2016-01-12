@@ -11,13 +11,12 @@ $display-date-width: 250px;
 .entry-date {
     padding-top: 50px;
     padding-bottom: 30px;
-    padding-left: 10px;
     position: relative;
 
     & > div {
         display: inline-block;
         position: absolute;
-        left: 10px;
+        left: 0;
         height: $display-date-font-size;
         width: $display-date-width;
         top: 52px;
@@ -39,7 +38,7 @@ $display-date-width: 250px;
 }
 
 .edit-date {
-    @include icon-pencil($color-primary, lighten($color-primary, 20));
+    background: transparent;
 
     height: 18px;
     outline: none;
@@ -50,18 +49,18 @@ $display-date-width: 250px;
     position: absolute;
     width: $display-date-width - 40px;
     left: 0;
-    background-position-x: $display-date-width - 60px;
 
     &:hover {
-        background-position-x: $display-date-width - 60px;
+        @include icon-pencil($color-primary, lighten($color-primary, 20));
+
+        background-position-x: $display-date-width - 60px !important;
     }
 }
 
-.text-field {
+.edit-entry {
 	  width: 100%;
-	  height: auto;
-    max-height: 80vh;
+    height: 80vh;
 	  margin-top: 10px;
-	  padding: 10px;
     outline: none;
+    overflow: auto;
 }
