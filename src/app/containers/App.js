@@ -9,7 +9,7 @@ import ActivityBar from '../components/activity-bar';
 class App extends Component {
     render() {
         return (
-            <div styleName='container'>
+            <div styleName='app'>
                 <ActivityBar />
 
                 <div styleName='content'>

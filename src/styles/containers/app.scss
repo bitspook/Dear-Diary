@@ -17,15 +17,18 @@ p {
 	font-family: sans-serif;
 }
 
-.container {
+.app {
     position: relative;
 	  font-family: sans-serif;
+    width: 100%;
 }
 
 .content {
     position: relative;
     margin: 0px auto;
+    width: 80%;
     max-width: 980px;
+    height: 100vh;
 
     p {
         font-family: 'Roboto';

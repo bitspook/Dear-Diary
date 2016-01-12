@@ -29,7 +29,6 @@ class Editor extends Component {
 
                     <DatePicker
                         styleName='edit-date'
-                        popoverTargetOffset='10px -125px'
                         onChange={this.handleDateChange}
                     />
                 </div>

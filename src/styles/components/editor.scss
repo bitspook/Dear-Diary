@@ -1,50 +1,66 @@
 @import '../_icons.scss';
+@import '../_colors.scss';
+
+$display-date-font-size: 22px;
+$display-date-width: 250px;
 
 .edit-page {
-	  padding-top:10px;
-	  padding-left: 120px;
-	  padding-bottom: 10px;
-	  padding-right: 10px;
+	  padding:10px;
 }
 
 .entry-date {
-    padding: 50px 0;
+    padding-top: 50px;
     padding-bottom: 30px;
     padding-left: 10px;
+    position: relative;
 
     & > div {
         display: inline-block;
+        position: absolute;
+        left: 10px;
+        height: $display-date-font-size;
+        width: $display-date-width;
+        top: 52px;
     }
 }
 
 .visible-date {
-	  width: 200px;
+	  width: $display-date-width;
     padding-right: 10px;
 	  height: 30px;
 	  font-weight: bold;
 	  margin-top: 20px;
     border: none;
-    font-size: 22px;
+    font-size: $display-date-font-size;
     outline: none;
     font-family: 'Roboto';
     vertical-align: text-bottom;
+    cursor: pointer;
 }
 
 .edit-date {
-    @include icon-pencil(#222, #444);
+    @include icon-pencil($color-primary, lighten($color-primary, 20));
 
-    width: 17px;
-    height: 17px;
+    height: 18px;
     outline: none;
     border: none;
     cursor: pointer;
     color: transparent;
     vertical-align: super;
+    position: absolute;
+    width: $display-date-width - 40px;
+    left: 0;
+    background-position-x: $display-date-width - 60px;
+
+    &:hover {
+        background-position-x: $display-date-width - 60px;
+    }
 }
 
 .text-field {
-	  width: 90%;
-	  height: 390px;
+	  width: 100%;
+	  height: auto;
+    max-height: 80vh;
 	  margin-top: 10px;
 	  padding: 10px;
     outline: none;
