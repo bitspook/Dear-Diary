@@ -9,6 +9,8 @@
 
 .entry-date {
     padding: 50px 0;
+    padding-bottom: 30px;
+    padding-left: 10px;
 
     & > div {
         display: inline-block;
@@ -45,4 +47,5 @@
 	  height: 390px;
 	  margin-top: 10px;
 	  padding: 10px;
+    outline: none;
 }

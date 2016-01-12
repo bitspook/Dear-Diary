@@ -4,9 +4,13 @@ import React, {
 import CSSModules from 'react-css-modules';
 import moment from 'moment';
 import styles from '../../styles/components/editor.scss';
-import DatePicker from 'react-datepicker';
 
+import DatePicker from 'react-datepicker';
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
+
+import MediumEditor from 'react-medium-editor';
+import '../../../node_modules/medium-editor/dist/css/medium-editor.css';
+import '../../../node_modules/medium-editor/dist/css/themes/default.css';
 
 class Editor extends Component {
     handleDateChange = () => {
@@ -31,7 +35,15 @@ class Editor extends Component {
                 </div>
 
                 <div >
-                    <textarea styleName='text-field' defaultValue='Enter your thoughts here' />
+                    <MediumEditor
+                        tag='pre'
+                        styleName='text-field'
+                        options={{
+                            placeholder: {
+                                text: 'Hello you fucking cunt!',
+                            },
+                        }}
+                    />
                 </div>
             </div>
         );

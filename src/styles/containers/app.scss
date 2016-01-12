@@ -17,6 +17,21 @@ p {
 	font-family: sans-serif;
 }
 
+.container {
+    position: relative;
+	  font-family: sans-serif;
+}
+
+.content {
+    position: relative;
+    margin: 0px auto;
+    max-width: 980px;
+
+    p {
+        font-family: 'Roboto';
+    }
+}
+
 .header {
 	color: red;
 }

@@ -9,10 +9,13 @@ import ActivityBar from '../components/activity-bar';
 class App extends Component {
     render() {
         return (
-            <div>
+            <div styleName='container'>
                 <ActivityBar />
 
-                <Editor />
+                <div styleName='content'>
+                    <Editor />
+                </div>
+
             </div>
         );
     }
