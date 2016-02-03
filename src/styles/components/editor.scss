@@ -5,7 +5,12 @@ $display-date-font-size: 22px;
 $display-date-width: 250px;
 
 .edit-page {
-	  padding:10px;
+    padding: 10px 35px;
+    padding-bottom: 0;
+    height: 99%;
+    background: #fff;
+    width: 100%;
+    box-shadow: #222 0px 0px 15px -5px;
 }
 
 .entry-date {

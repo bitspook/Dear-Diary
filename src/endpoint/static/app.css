@@ -49,13 +49,19 @@ p {
   margin: 0px auto;
   width: 80%;
   max-width: 980px;
-  height: 100vh;
+  padding-top: 40px;
+  height: 120vh;
 }
 
 .app__header___23Xud {
   color: red;
 }.editor__edit-page___27nWr {
-  padding: 10px;
+  padding: 10px 35px;
+  padding-bottom: 0;
+  height: 99%;
+  background: #fff;
+  width: 100%;
+  box-shadow: #222 0px 0px 15px -5px;
 }
 
 .editor__entry-date___1Gecm {
