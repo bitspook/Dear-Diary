@@ -6,3 +6,9 @@ $color-activity-bar-item: $color-primary;
 $color-activity-bar-item-hover: lighten($color-primary, 10);
 $color-activity-bar-item-splitter: #e7e6e6;
 $color-activity-bar-shadow: #222;
+
+$color-editor-toolbar-bg: #e7e6e6;
+$color-editor-toolbar-button: $color-primary;
+$color-editor-toolbar-border: darken($color-editor-toolbar-bg, 40);
+$color-editor-toolbar-active-bg: lighten($color-primary, 40);
+$color-editor-toolbar-form: lighten($color-primary, 10);

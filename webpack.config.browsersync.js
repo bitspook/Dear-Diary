@@ -3,7 +3,6 @@
 
 var ExtractTextPlugin,
     WriteFilePlugin,
-    devVarPlugin,
     devServer,
     path,
     webpack;
@@ -12,10 +11,6 @@ webpack = require('webpack');
 path = require('path');
 ExtractTextPlugin = require('extract-text-webpack-plugin');
 WriteFilePlugin = require('write-file-webpack-plugin');
-
-devVarPlugin = new webpack.DefinePlugin({
-    __DEV__: JSON.stringify(JSON.parse(process.env.NODE_ENV === 'development'))
-});
 
 // webpack-dev-server --hot
 devServer = {
@@ -28,7 +23,7 @@ devServer = {
     host: '127.0.0.1',
     port: 8000,
     hot: true,
-    outputPath: path.resolve(__dirname, './src/endpoint/static')
+    outputPath: path.resolve(__dirname, './src/endpoint/static'),
 };
 
 module.exports = {
@@ -41,20 +36,20 @@ module.exports = {
             'webpack/hot/dev-server',
             'webpack-hot-middleware/client',
 
-            './app'
-        ]
+            './app',
+        ],
     },
     output: {
         path: devServer.outputPath,
         filename: '[name].js',
-        publicPath: devServer.publicPath
+        publicPath: devServer.publicPath,
     },
     plugins: [
         new WriteFilePlugin({
-            test: /\.css$/
+            test: /\.css$/,
         }),
         new ExtractTextPlugin('app.css', {
-            allChunks: true
+            allChunks: true,
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
@@ -63,61 +58,73 @@ module.exports = {
         // https://github.com/webpack/docs/wiki/optimization#deduplication
         new webpack.optimize.DedupePlugin(),
         new webpack.NoErrorsPlugin(),
-        devVarPlugin
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse(process.env.NODE_ENV === 'development')),
+        }),
     ],
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 include: [
-                    path.resolve(__dirname, 'src')
+                    path.resolve(__dirname, 'src'),
                 ],
-                loader: 'babel'
+                loader: 'babel',
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style', 'css!resolve-url'),
                 include: [
-                        /node_modules/
-                ]
+                    /node_modules/,
+                ],
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url'),
                 exclude: [
-                        /node_modules/
-                ]
+                    /node_modules/,
+                ],
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url!sass')
+                loader: ExtractTextPlugin.extract('style', 'css!resolve-url!sass'),
+                include: [
+                    /no-css-modules/,
+                ],
+            },
+            {
+                test: /\.scss$/,
+                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url!sass'),
+                exclude: [
+                    /no-css-modules/,
+                ],
             },
             {
                 test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
                     'file?hash=sha512&digest=hex&name=[hash].[ext]',
-                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
-                ]
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
+                ],
             },
             {
                 test: /\.woff(2)?$/,
-                loader: 'file?limit=10000&mimetype=application/font-woff'
+                loader: 'file?limit=10000&mimetype=application/font-woff',
             }, {
                 test: /\.ttf$/,
-                loader: 'file?limit=10000&mimetype=application/octet-stream'
+                loader: 'file?limit=10000&mimetype=application/octet-stream',
             }, {
                 test: /\.eot$/,
-                loader: 'file'
+                loader: 'file',
             }, {
                 test: /\.svg$/,
-                loader: 'file?limit=10000&mimetype=image/svg+xml'
-            }
-        ]
+                loader: 'file?limit=10000&mimetype=image/svg+xml',
+            },
+        ],
     },
     resolve: {
-        fallback: path.resolve(__dirname, './node_modules')
+        fallback: path.resolve(__dirname, './node_modules'),
     },
     resolveLoader: {
-        fallback: path.resolve(__dirname, './node_modules')
-    }
+        fallback: path.resolve(__dirname, './node_modules'),
+    },
 };

@@ -9,8 +9,9 @@ import DatePicker from 'react-datepicker';
 import '../../../node_modules/react-datepicker/dist/react-datepicker.css';
 
 import MediumEditor from 'react-medium-editor';
+
+import '../../styles/no-css-modules/medium-editor.scss';
 import '../../../node_modules/medium-editor/dist/css/medium-editor.css';
-import '../../../node_modules/medium-editor/dist/css/themes/default.css';
 
 class Editor extends Component {
     handleDateChange = () => {
