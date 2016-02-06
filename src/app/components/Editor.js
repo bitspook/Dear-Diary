@@ -29,7 +29,7 @@ class Editor extends Component {
 
                     <DatePicker
                         styleName='edit-date'
-                        popoverTargetOffset='10px 25px'
+                        popoverTargetOffset='15px 25px'
                         onChange={this.handleDateChange}
                     />
                 </div>
@@ -39,11 +39,12 @@ class Editor extends Component {
                         tag='pre'
                         styleName='edit-entry'
                         options={{
+                            targetBlank: true,
                             placeholder: {
                                 text: 'Dear Diary,',
                             },
                             toolbar: {
-                                buttons: ['bold', 'italic', 'strikethrough', 'h2', 'h3', 'removeFormat'],
+                                buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'h2', 'orderedlist', 'unorderedlist', 'quote'],
                             },
                         }}
                     />

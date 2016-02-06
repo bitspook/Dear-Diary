@@ -47,7 +47,9 @@ $display-date-width: 250px;
 
     height: 18px;
     outline: none;
-    border: none;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
     cursor: pointer;
     color: transparent;
     vertical-align: super;
@@ -68,4 +70,5 @@ $display-date-width: 250px;
 	  margin-top: 10px;
     outline: none;
     overflow: auto;
+    white-space: pre-line;
 }
