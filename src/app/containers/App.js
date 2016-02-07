@@ -3,8 +3,12 @@ import React, {
 } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from '../../styles/containers/app.scss';
-import Editor from '../components/editor';
-import ActivityBar from '../components/activity-bar';
+import {
+    Editor,
+} from '../components/Editor';
+import {
+    ActivityBar,
+} from '../components/ActivityBar';
 
 class App extends Component {
     render() {
