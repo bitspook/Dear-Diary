@@ -4,7 +4,7 @@ import fecha from 'fecha';
 let initialState;
 
 initialState = {
-    activeEntry: null,
+    activeEntryId: fecha.format(new Date(), 'YYYY-MM-DD'),
     activeDate: new Date(),
     entries: {},
 };
