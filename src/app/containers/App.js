@@ -9,9 +9,11 @@ import {
 import {
     ActivityBar,
 } from '../components/ActivityBar';
+import connect from '../lib/connect';
 
 class App extends Component {
     render() {
+        console.warn('Props', this.props);
         return (
             <div styleName='app'>
                 <ActivityBar />
@@ -25,4 +27,6 @@ class App extends Component {
     }
 }
 
-export default CSSModules(App, styles);
+export default connect((state) => {
+    return state.toJS();
+})(CSSModules(App, styles));

@@ -35,7 +35,9 @@
   },
   "dependencies": {
     "fecha": "^1.2.2",
+    "immutable": "^3.7.6",
     "medium-editor": "^5.14.1",
+    "ramda": "^0.19.1",
     "react": "^0.14.7",
     "react-css-modules": "^3.7.4",
     "react-datepicker": "^0.20.0",

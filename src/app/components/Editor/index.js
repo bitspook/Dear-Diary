@@ -1,6 +1,12 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import fecha from 'fecha';
+import {
+    Subject,
+} from 'rxjs-es/Subject';
+
+import createActionCreators from '../../lib/createActionCreators';
+
 import styles from '../../../styles/components/editor.scss';
 
 import DatePicker from 'react-datepicker';
@@ -12,7 +18,15 @@ import '../../../styles/no-css-modules/medium-editor.scss';
 import '../../../../node_modules/medium-editor/dist/css/medium-editor.css';
 
 let Editor,
-    action$;
+    action$,
+    actions,
+    constants;
+
+constants = [
+    'CHANGE_CURRENT_DATE',
+];
+action$ = new Subject();
+actions = createActionCreators(constants, action$);
 
 Editor = () => {
     let currentDate;
@@ -29,7 +43,7 @@ Editor = () => {
                     popoverTargetOffset='15px 25px'
                     onChange={
                         function onDatePickerChange(moment) {
-                            console.log(moment.toDate());
+                            actions.changeCurrentDate(moment.toDate());
                         }}
                 />
             </div>
