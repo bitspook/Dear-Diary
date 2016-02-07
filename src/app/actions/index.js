@@ -1,6 +1,4 @@
-import {
-    action$ as editorAction$,
-} from '../components/Editor';
+import editorAction$ from './editor';
 
 let action$;
 

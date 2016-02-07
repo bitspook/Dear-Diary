@@ -12,4 +12,4 @@ export default (constants, subject$) => reduce((accum, type) => {
     };
 
     return accum;
-}, {}, constants);
+}, {}, Object.keys(constants));

@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from '../../styles/containers/app.scss';
@@ -12,14 +13,26 @@ import {
 import connect from '../lib/connect';
 
 class App extends Component {
+    static propTypes = {
+        activeDate: PropTypes.instanceOf(Date),
+        activeEntryText: PropTypes.string,
+    };
+
     render() {
-        console.warn('Props', this.props);
+        let {
+            activeDate,
+            activeEntryText,
+        } = this.props;
+
         return (
             <div styleName='app'>
                 <ActivityBar />
 
                 <div styleName='content'>
-                    <Editor />
+                    <Editor
+                        activeDate={activeDate}
+                        activeEntryText={activeEntryText}
+                    />
                 </div>
 
             </div>

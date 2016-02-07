@@ -5,33 +5,35 @@ import 'rxjs-es/add/operator/map';
 import 'rxjs-es/add/operator/mergeMap';
 import 'rxjs-es/add/operator/do';
 import 'rxjs-es/add/operator/share';
-import Immutable from 'immutable';
-import fecha from 'fecha';
+import 'rxjs-es/add/operator/retry';
 import {
     combineReducers,
 } from 'redux-immutable';
 
-let initialState,
-    reducers,
+import initialState from './initial-state';
+import reducers from './reducers';
+
+let reducer,
     state$;
 
-initialState = Immutable.fromJS({
-    date: fecha.format(new Date(), 'YYYY-MM-DD'),
-});
-
-reducers = combineReducers({
-    date: (state, action) => {
-        if (action.type === 'CHANGE_CURRENT_DATE') {
-            return fecha.format(action.payload, 'YYYY-MM-DD');
-        }
-
-        return state;
-    },
-});
+reducer = combineReducers(reducers);
 
 state$ = action$
-    .scan(reducers, initialState)
-    .startWith(initialState)
+    .startWith({
+        payload: null,
+        type: '@rx-redux/INITIALIZE',
+    })
+    .do(action => {
+        console.groupCollapsed(action.type);
+        console.log(action);
+        console.groupEnd();
+    })
+    .scan(reducer, initialState)
+    .do(state => {
+        console.group('Next State');
+        console.log(state.toJS());
+        console.groupEnd();
+    })
     .share();
 
 
