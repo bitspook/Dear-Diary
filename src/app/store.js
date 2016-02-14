@@ -1,40 +1,28 @@
-import action$ from './actions';
-import 'rxjs-es/add/operator/scan';
-import 'rxjs-es/add/operator/startWith';
-import 'rxjs-es/add/operator/map';
-import 'rxjs-es/add/operator/mergeMap';
-import 'rxjs-es/add/operator/do';
-import 'rxjs-es/add/operator/share';
-import 'rxjs-es/add/operator/retry';
+import {
+    applyMiddleware,
+    createStore,
+} from 'redux';
 import {
     combineReducers,
 } from 'redux-immutable';
-
-import initialState from './initial-state';
 import reducers from './reducers';
+import state from './initial-state';
+import createLogger from 'redux-logger';
 
-let reducer,
-    state$;
+let logger,
+    reducer,
+    store;
+
+logger = createLogger({
+    collapsed: true,
+    logger: console,
+    stateTransformer: (nextState) => {
+        return nextState.toJS();
+    },
+});
 
 reducer = combineReducers(reducers);
 
-state$ = action$
-    .startWith({
-        payload: null,
-        type: '@rx-redux/INITIALIZE',
-    })
-    .do(action => {
-        console.groupCollapsed(action.type);
-        console.log(action);
-        console.groupEnd();
-    })
-    .scan(reducer, initialState)
-    .do(state => {
-        console.group('Next State');
-        console.log(state.toJS());
-        console.groupEnd();
-    })
-    .share();
+store = createStore(reducer, state, applyMiddleware(logger));
 
-
-export default state$;
+export default store;

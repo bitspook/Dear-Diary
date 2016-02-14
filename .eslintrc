@@ -7,10 +7,10 @@
             2,
             4
         ],
-        "one-var": [
-            2,
-            "always"
-        ],
+        "one-var": [2, {
+            "let": "always",
+            "const": "never"
+        }],
         "id-length": 0,
         "jsx-quotes": [2, "prefer-single"],
         "new-cap": 0

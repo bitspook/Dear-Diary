@@ -7,7 +7,10 @@ import {
 } from 'rxjs-es/Observable';
 import fecha from 'fecha';
 import actionSelector from '../lib/actionSelector';
-import actionTypes from '../constants';
+import {
+    CHANGE_ACTIVE_DATE,
+    CHANGE_ACTIVE_ENTRY_ID
+} from '../constants';
 import {
     actionTypes as editorActionTypes,
     action$ as editorAction$,
@@ -19,13 +22,13 @@ let action$,
 
 activateDate$ = actionSelector(editorAction$, editorActionTypes.CHANGE_DATE)
     .map(({payload}) => ({
-        type: actionTypes.CHANGE_ACTIVE_DATE,
+        type: CHANGE_ACTIVE_DATE,
         payload,
     }));
 
 activateEntry$ = actionSelector(editorAction$, editorActionTypes.CHANGE_DATE)
     .map(({payload: date}) => ({
-        type: actionTypes.CHANGE_ACTIVE_ENTRY_ID,
+        type: CHANGE_ACTIVE_ENTRY_ID,
         payload: fecha.format(date, 'YYYY-MM-DD'),
     }));
 

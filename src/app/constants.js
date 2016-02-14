@@ -1,10 +1,2 @@
-import createConstants from './lib/createConstants';
-
-let actionTypes;
-
-actionTypes = createConstants([
-    'CHANGE_ACTIVE_DATE',
-    'CHANGE_ACTIVE_ENTRY_ID'
-]);
-
-export default actionTypes;
+export const CHANGE_ACTIVE_DATE = 'CHANGE_ACTIVE_DATE';
+export const CHANGE_ACTIVE_ENTRY_ID = 'CHANGE_ACTIVE_ENTRY_ID';
