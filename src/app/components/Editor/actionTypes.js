@@ -1,5 +1,1 @@
-import createConstants from '../../lib/createConstants';
-
-export default createConstants([
-    'CHANGE_DATE',
-]);
+export const CHANGE_DATE = 'CHANGE_DATE';

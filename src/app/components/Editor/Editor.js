@@ -17,14 +17,18 @@ import MediumEditor from 'react-medium-editor';
 import '../../../styles/no-css-modules/medium-editor.scss';
 import '../../../../node_modules/medium-editor/dist/css/medium-editor.css';
 
-import actionTypes from './actionTypes';
+import {
+    CHANGE_DATE
+} from './actionTypes';
 
 let Editor,
     action$,
     actions;
 
 action$ = new Subject();
-actions = createActionCreators(actionTypes, action$);
+actions = createActionCreators({
+    CHANGE_DATE
+}, action$);
 
 Editor = ({activeDate}) => {
     let currentDate;

@@ -10,7 +10,7 @@ import actionSelector from '../lib/actionSelector';
 import {
     CHANGE_ACTIVE_DATE,
     CHANGE_ACTIVE_ENTRY_ID
-} from '../constants';
+} from '../actionTypes';
 import {
     actionTypes as editorActionTypes,
     action$ as editorAction$,

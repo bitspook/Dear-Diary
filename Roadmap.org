@@ -1,10 +1,13 @@
 * Roadmap
 
-** TODO Remove custom redux implementation
+** DONE Remove custom redux implementation
+CLOSED: [2016-02-14 Sun 17:31]
 
 Enough playing. Working rxjs POC is in place, it's time we move the codebase to redux library. The less code (we have to maintain) the better.
 
-** TODO Add redux-devtools
+** DONE Add redux-devtools
+CLOSED: [2016-02-14 Sun 17:51]
+Added via chrome extension
 
 ** TODO Add TypeScript
 

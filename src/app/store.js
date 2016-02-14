@@ -1,12 +1,13 @@
 import {
     applyMiddleware,
     createStore,
+    compose,
 } from 'redux';
 import {
     combineReducers,
 } from 'redux-immutable';
 import reducers from './reducers';
-import state from './initial-state';
+import state from './initialState';
 import createLogger from 'redux-logger';
 
 let logger,
@@ -23,6 +24,9 @@ logger = createLogger({
 
 reducer = combineReducers(reducers);
 
-store = createStore(reducer, state, applyMiddleware(logger));
+store = createStore(reducer, state, compose(
+    applyMiddleware(logger),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 export default store;

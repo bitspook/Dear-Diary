@@ -2,7 +2,7 @@ import createReducer from '../lib/createReducer';
 import {
     CHANGE_ACTIVE_DATE,
     CHANGE_ACTIVE_ENTRY_ID
-} from '../constants';
+} from '../actionTypes';
 import identity from 'ramda/src/identity';
 
 export default {
