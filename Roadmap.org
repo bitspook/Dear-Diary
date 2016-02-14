@@ -1,0 +1,16 @@
+* Roadmap
+
+** TODO Remove custom redux implementation
+
+Enough playing. Working rxjs POC is in place, it's time we move the codebase to redux library. The less code (we have to maintain) the better.
+
+** TODO Add redux-devtools
+
+** TODO Add TypeScript
+
+Port all code to Typescript
+
+** TODO Remove Browsersync
+
+- [ ] Remove browsersync dependency. Use simple express server with babel-hmr
+- [ ] Add hmr snipper required to hot-push redux reducers
