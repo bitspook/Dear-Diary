@@ -1,1 +1,5 @@
-export ActivityBar from './ActivityBar';
+import ActivityBar from './ActivityBar';
+
+export {
+    ActivityBar
+};

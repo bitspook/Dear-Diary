@@ -1,10 +1,6 @@
-import 'rxjs-es/add/operator/filter';
-import 'rxjs-es/add/operator/map';
-import 'rxjs-es/add/operator/do';
-import 'rxjs-es/add/operator/merge-static';
 import {
     Observable,
-} from 'rxjs-es/Observable';
+} from 'rxjs';
 import fecha from 'fecha';
 import actionSelector from '../lib/actionSelector';
 import {

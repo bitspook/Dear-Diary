@@ -36,7 +36,7 @@ module.exports = {
             'webpack/hot/dev-server',
             'webpack-hot-middleware/client',
 
-            './app',
+            './app/index.tsx',
         ],
     },
     output: {
@@ -57,10 +57,7 @@ module.exports = {
         // new webpack.NewWatchingPlugin(),
         // https://github.com/webpack/docs/wiki/optimization#deduplication
         new webpack.optimize.DedupePlugin(),
-        new webpack.NoErrorsPlugin(),
-        new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse(process.env.NODE_ENV === 'development')),
-        }),
+        new webpack.NoErrorsPlugin()
     ],
     module: {
         loaders: [
@@ -68,9 +65,18 @@ module.exports = {
                 test: /\.js$/,
                 include: [
                     path.resolve(__dirname, 'src'),
-                    /rxjs-es/,
                 ],
                 loader: 'babel',
+            },
+            {
+                test: /\.ts(x?)$/,
+                include: [
+                    path.resolve(__dirname, 'src'),
+                ],
+                loaders: [
+                    'babel',
+                    'ts-loader',
+                ],
             },
             {
                 test: /\.css$/,
@@ -123,9 +129,6 @@ module.exports = {
         ],
     },
     resolve: {
-        fallback: path.resolve(__dirname, './node_modules'),
-    },
-    resolveLoader: {
-        fallback: path.resolve(__dirname, './node_modules'),
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
 };

@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules';
 import fecha from 'fecha';
 import {
     Subject,
-} from 'rxjs-es/Subject';
+} from 'rxjs';
 
 import createActionCreators from '../../lib/createActionCreators';
 
