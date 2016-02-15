@@ -53,11 +53,7 @@ module.exports = {
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.OldWatchingPlugin(),
-        // new webpack.NewWatchingPlugin(),
-        // https://github.com/webpack/docs/wiki/optimization#deduplication
-        new webpack.optimize.DedupePlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
     ],
     module: {
         loaders: [
