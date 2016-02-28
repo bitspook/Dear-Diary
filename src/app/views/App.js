@@ -14,7 +14,7 @@ import {
     connect,
 } from 'react-redux';
 import selector from '../selectors/appSelector';
-import action$ from '../actions';
+import action$ from '../action$';
 
 class App extends Component {
     static propTypes = {
@@ -46,7 +46,7 @@ class App extends Component {
                 <div styleName='content'>
                     <Editor
                         activeDate={activeDate}
-                        activeEntryText={activeEntry.content}
+                        entry={activeEntry}
                     />
                 </div>
 

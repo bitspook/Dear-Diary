@@ -22,6 +22,10 @@ import {
     CHANGE_ENTRY_CONTENT,
 } from './actionTypes';
 
+import {
+    TypeEntry,
+} from '../../typeDefinitions/entry';
+
 let Editor,
     action$,
     actions;
@@ -32,11 +36,12 @@ actions = createActionCreators({
     CHANGE_ENTRY_CONTENT,
 }, action$);
 
-const handleEntryContentChange = (content) => {
-    actions.changeEntryContent(content);
-};
+type EditorProps = {
+    activeDate: Date,
+    entry: TypeEntry
+}
 
-Editor = ({activeDate}) => {
+Editor = ({activeDate, entry} : EditorProps) => {
     let currentDate;
 
     currentDate = fecha.format(activeDate, 'MMMM DD, YYYY');
@@ -70,7 +75,9 @@ Editor = ({activeDate}) => {
                                 buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'h2', 'orderedlist', 'unorderedlist', 'quote'],
                             },
                         }}
-                    onChange={handleEntryContentChange}
+                    onChange={function(content : string) {
+                        actions.changeEntryContent(entry.id, content);
+                    }}
                 />
             </div>
         </div>
