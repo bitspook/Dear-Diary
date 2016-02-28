@@ -18,7 +18,8 @@ import '../../../styles/no-css-modules/medium-editor.scss';
 import '../../../../node_modules/medium-editor/dist/css/medium-editor.css';
 
 import {
-    CHANGE_DATE
+    CHANGE_DATE,
+    CHANGE_ENTRY_CONTENT,
 } from './actionTypes';
 
 let Editor,
@@ -27,8 +28,13 @@ let Editor,
 
 action$ = new Subject();
 actions = createActionCreators({
-    CHANGE_DATE
+    CHANGE_DATE,
+    CHANGE_ENTRY_CONTENT,
 }, action$);
+
+const handleEntryContentChange = (content) => {
+    actions.changeEntryContent(content);
+};
 
 Editor = ({activeDate}) => {
     let currentDate;
@@ -64,6 +70,7 @@ Editor = ({activeDate}) => {
                                 buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'h2', 'orderedlist', 'unorderedlist', 'quote'],
                             },
                         }}
+                    onChange={handleEntryContentChange}
                 />
             </div>
         </div>

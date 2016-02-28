@@ -477,6 +477,15 @@ p {
   right: 7px;
   text-align: center;
   top: 50%;
+}
+
+.datepicker__today-button {
+  background: #f0f0f0;
+  border-top: 1px solid #aeaeae;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 0;
 }.medium-toolbar-arrow-under:after {
   border-color: #837e7e transparent transparent transparent;
   top: 50px;

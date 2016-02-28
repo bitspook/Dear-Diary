@@ -13,12 +13,13 @@ import {
 import {
     connect,
 } from 'react-redux';
+import selector from '../selectors/appSelector';
 import action$ from '../actions';
 
 class App extends Component {
     static propTypes = {
         activeDate: PropTypes.instanceOf(Date).isRequired,
-        activeEntryText: PropTypes.string.isRequired,
+        activeEntry: PropTypes.object.isRequired,
         dispatch: PropTypes.func.isRequired,
     };
 
@@ -35,9 +36,9 @@ class App extends Component {
     render() {
         let {
             activeDate,
-            activeEntryText,
+            activeEntry,
         } = this.props;
-        
+
         return (
             <div styleName='app'>
                 <ActivityBar />
@@ -45,7 +46,7 @@ class App extends Component {
                 <div styleName='content'>
                     <Editor
                         activeDate={activeDate}
-                        activeEntryText={activeEntryText}
+                        activeEntryText={activeEntry.content}
                     />
                 </div>
 
@@ -54,6 +55,4 @@ class App extends Component {
     }
 }
 
-export default connect((state) => {
-    return state.toJS();
-})(CSSModules(App, styles));
+export default connect(selector)(CSSModules(App, styles));

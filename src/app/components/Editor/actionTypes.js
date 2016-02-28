@@ -1,1 +1,2 @@
 export const CHANGE_DATE = 'CHANGE_DATE';
+export const CHANGE_ENTRY_CONTENT = 'CHANGE_ENTRY_CONTENT';

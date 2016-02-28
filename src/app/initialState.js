@@ -1,12 +1,12 @@
-import Immutable from 'immutable';
+import {
+    Map
+} from 'immutable';
 import fecha from 'fecha';
 
-let initialState;
-
-initialState = {
+const initialState = {
     activeEntryId: fecha.format(new Date(), 'YYYY-MM-DD'),
     activeDate: new Date(),
-    entries: {},
+    entries: Map()
 };
 
-export default Immutable.fromJS(initialState);
+export default Map(initialState);

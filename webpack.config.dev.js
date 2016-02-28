@@ -1,18 +1,15 @@
 /* global require, __dirname, module */
 /* eslint-disable no-process-env, id-match, no-var, object-shorthand */
 
-var ExtractTextPlugin,
-    WriteFilePlugin,
+var autoprefixer,
     devServer,
     path,
     webpack;
 
+autoprefixer = require('autoprefixer');
 webpack = require('webpack');
 path = require('path');
-ExtractTextPlugin = require('extract-text-webpack-plugin');
-WriteFilePlugin = require('write-file-webpack-plugin');
 
-// webpack-dev-server --hot
 devServer = {
     contentBase: path.join(__dirname, '/src/endpoint'),
     colors: true,
@@ -36,7 +33,7 @@ module.exports = {
             'webpack/hot/dev-server',
             'webpack-hot-middleware/client',
 
-            './app/index.tsx',
+            './app',
         ],
     },
     output: {
@@ -45,16 +42,15 @@ module.exports = {
         publicPath: devServer.publicPath,
     },
     plugins: [
-        new WriteFilePlugin({
-            test: /\.css$/,
-        }),
-        new ExtractTextPlugin('app.css', {
-            allChunks: true,
-        }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
     ],
+    postcss: function() {
+        return [
+            autoprefixer
+        ];
+    },
     module: {
         loaders: [
             {
@@ -65,41 +61,50 @@ module.exports = {
                 loader: 'babel',
             },
             {
-                test: /\.ts(x?)$/,
-                include: [
-                    path.resolve(__dirname, 'src'),
-                ],
+                test: /\.css$/,
                 loaders: [
-                    'babel',
-                    'ts-loader',
+                    'style?sourceMap',
+                    'css'
+                ],
+                include: [
+                        /node_modules/,
                 ],
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css!resolve-url'),
-                include: [
-                    /node_modules/,
+                loaders: [
+                    'style?sourceMap',
+                    'css?modules&importLoaders=1&localIdentName=[name]___[local]___[hash:base64:5]',
+                    'postcss-loader',
+                    'resolve-url'
                 ],
-            },
-            {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url'),
                 exclude: [
-                    /node_modules/,
+                        /node_modules/,
                 ],
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css!resolve-url!sass'),
+                loaders: [
+                    'style?sourceMap',
+                    'css',
+                    'postcss-loader',
+                    'resolve-url',
+                    'sass',
+                ],
                 include: [
-                    /no-css-modules/,
+                        /no-css-modules/,
                 ],
             },
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url!sass'),
+                loaders: [
+                    'style?sourceMap',
+                    'css?modules&importLoaders=1&localIdentName=[name]___[local]___[hash:base64:5]',
+                    'postcss-loader',
+                    'resolve-url',
+                    'sass'],
                 exclude: [
-                    /no-css-modules/,
+                        /no-css-modules/,
                 ],
             },
             {
@@ -123,8 +128,5 @@ module.exports = {
                 loader: 'file?limit=10000&mimetype=image/svg+xml',
             },
         ],
-    },
-    resolve: {
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
-    },
+    }
 };

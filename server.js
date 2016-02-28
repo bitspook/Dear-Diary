@@ -1,45 +1,39 @@
-// https://github.com/Browsersync/recipes/tree/master/recipes/webpack.react-hot-loader
-var browserSync,
+/* eslint-disable no-var, import/no-require, import/no-commonjs, prefer-arrow-callback */
+var bundler,
+    express,
+    path,
+    server,
     webpack,
-    webpackDevMiddleware,
-    webpackHotMiddleware,
     webpackConfig,
-    bundler;
+    webpackDevMiddleware,
+    webpackHotMiddleware;
 
-browserSync = require('browser-sync');
+path = require('path');
 webpack = require('webpack');
 webpackDevMiddleware = require('webpack-dev-middleware');
 webpackHotMiddleware = require('webpack-hot-middleware');
-webpackConfig = require('./webpack.config.browsersync');
+express = require('express');
+
+webpackConfig = require('./webpack.config.dev');
 bundler = webpack(webpackConfig);
 
-browserSync({
-    ui: false,
-    ghostMode: false,
-    online: false,
-    open: false,
-    notify: false,
-    host: webpackConfig.devServer.host,
-    port: webpackConfig.devServer.port,
-    xip: false,
-    tunnel: true,
-    server: {
-        baseDir: './src/endpoint',
+server = express();
 
-        middleware: [
-            webpackDevMiddleware(bundler, {
-                publicPath: webpackConfig.output.publicPath,
-                noInfo: true,
-                quiet: false,
-                stats: {
-                    colors: true
-                }
-            }),
-            webpackHotMiddleware(bundler)
-        ]
+server.use(webpackDevMiddleware(bundler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    quiet: false,
+    stats: {
+        colors: true,
     },
+}));
 
-    files: [
-        './src/endpoint/static/*.css'
-    ]
+server.use(webpackHotMiddleware(bundler));
+
+server.get('/', function(req, res) {
+    res.sendFile(path.resolve(webpackConfig.devServer.contentBase, 'index.html'));
+});
+
+server.listen(webpackConfig.devServer.port, webpackConfig.devServer.host, function() {
+    console.log('Dev server listening at port', webpackConfig.devServer.port);
 });
