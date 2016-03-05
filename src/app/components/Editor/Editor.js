@@ -22,9 +22,11 @@ import {
     CHANGE_ENTRY_CONTENT,
 } from './actionTypes';
 
-import {
-    TypeEntry,
-} from '../../typeDefinitions/entry';
+type TypeEntry = {
+    content: string,
+    date: Date,
+    id: string
+};
 
 let Editor,
     action$,

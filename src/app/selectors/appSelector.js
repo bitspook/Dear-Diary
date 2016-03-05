@@ -2,11 +2,14 @@ import fecha from 'fecha';
 import {
     Map,
 } from 'immutable';
-import {
-    TypeEntry,
-} from '../typeDefinitions/entry';
 
-export type AppProps = {
+type TypeEntry = {
+    content: string,
+    date: Date,
+    id: string
+};
+
+type AppProps = {
     activeDate: Date,
     activeEntry: TypeEntry
 };
