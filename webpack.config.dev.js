@@ -1,14 +1,16 @@
 /* global require, __dirname, module */
-/* eslint-disable no-process-env, id-match, no-var, object-shorthand */
+/* eslint-disable no-process-env, id-match, no-var, one-var, object-shorthand */
 
 var autoprefixer,
     devServer,
+    es6moduleNames,
     path,
     webpack;
 
 autoprefixer = require('autoprefixer');
 webpack = require('webpack');
 path = require('path');
+es6moduleNames = require('./es6moduleNames');
 
 devServer = {
     contentBase: path.join(__dirname, '/src/endpoint'),
@@ -55,9 +57,9 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                include: [
+                include: es6moduleNames.concat([
                     path.resolve(__dirname, 'src'),
-                ],
+                ]),
                 loader: 'babel',
             },
             {
@@ -128,5 +130,10 @@ module.exports = {
                 loader: 'file?limit=10000&mimetype=image/svg+xml',
             },
         ],
-    }
+    },
+    resolve: {
+        alias: {
+            'react': path.resolve(__dirname, 'node_modules/react'),
+        },
+    },
 };

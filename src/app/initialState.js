@@ -1,12 +1,15 @@
 import {
-    Map
+    Map,
 } from 'immutable';
-import fecha from 'fecha';
+import Entry from './models/Entry';
 
-const initialState = {
-    activeEntryId: fecha.format(new Date(), 'YYYY-MM-DD'),
-    activeDate: new Date(),
-    entries: Map()
+const newEntry = new Entry(new Date());
+
+const state = {
+    activeEntryId: newEntry.id,
+    entries: Map({
+        [newEntry.id]: Map(newEntry),
+    }),
 };
 
-export default Map(initialState);
+export default Map(state);

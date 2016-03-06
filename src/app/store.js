@@ -9,12 +9,11 @@ import {
 import reducers from './reducers';
 import state from './initialState';
 import createLogger from 'redux-logger';
+import {
+    enableBatching,
+} from 'redux-batched-actions';
 
-let logger,
-    reducer,
-    store;
-
-logger = createLogger({
+const logger = createLogger({
     collapsed: true,
     logger: console,
     stateTransformer: (nextState) => {
@@ -22,9 +21,12 @@ logger = createLogger({
     },
 });
 
-reducer = combineReducers(reducers);
+const reducer = compose(
+    enableBatching,
+    combineReducers
+)(reducers);
 
-store = createStore(reducer, state, compose(
+const store = createStore(reducer, state, compose(
     applyMiddleware(logger),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));

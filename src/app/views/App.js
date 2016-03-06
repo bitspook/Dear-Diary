@@ -18,7 +18,6 @@ import action$ from '../action$';
 
 class App extends Component {
     static propTypes = {
-        activeDate: PropTypes.instanceOf(Date).isRequired,
         activeEntry: PropTypes.object.isRequired,
         dispatch: PropTypes.func.isRequired,
     };
@@ -34,8 +33,7 @@ class App extends Component {
     };
 
     render() {
-        let {
-            activeDate,
+        const {
             activeEntry,
         } = this.props;
 
@@ -45,7 +43,6 @@ class App extends Component {
 
                 <div styleName='content'>
                     <Editor
-                        activeDate={activeDate}
                         entry={activeEntry}
                     />
                 </div>

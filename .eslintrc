@@ -1,16 +1,12 @@
 {
     "extends": "airbnb",
+    "prefer-const": 1,
     "rules": {
-        "prefer-const": 0,
         "curly": 0,
         "indent": [
             2,
             4
         ],
-        "one-var": [2, {
-            "let": "always",
-            "const": "never"
-        }],
         "id-length": 0,
         "jsx-quotes": [2, "prefer-single"],
         "new-cap": 0

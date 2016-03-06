@@ -2,51 +2,41 @@ import React from 'react';
 import CSSModules from 'react-css-modules';
 import fecha from 'fecha';
 import {
+    Map,
+} from 'immutable';
+import {
     Subject,
 } from 'rxjs';
-
 import createActionCreators from '../../lib/createActionCreators';
-
 import styles from '../../../styles/components/editor.scss';
-
 import DatePicker from 'react-datepicker';
 import '../../../../node_modules/react-datepicker/dist/react-datepicker.css';
-
-import MediumEditor from 'react-medium-editor';
-
+import MediumEditor from 'react-medium-editor-es6';
 import '../../../styles/no-css-modules/medium-editor.scss';
 import '../../../../node_modules/medium-editor/dist/css/medium-editor.css';
-
 import {
     CHANGE_DATE,
     CHANGE_ENTRY_CONTENT,
 } from './actionTypes';
 
-type TypeEntry = {
-    content: string,
-    date: Date,
-    id: string
-};
 
-let Editor,
-    action$,
-    actions;
-
-action$ = new Subject();
-actions = createActionCreators({
+const action$ = new Subject();
+const actions = createActionCreators({
     CHANGE_DATE,
     CHANGE_ENTRY_CONTENT,
 }, action$);
 
 type EditorProps = {
-    activeDate: Date,
-    entry: TypeEntry
+    entry: Map
 }
 
-Editor = ({activeDate, entry} : EditorProps) => {
-    let currentDate;
+let Editor = ({entry} : EditorProps) => {
+    const currentDate = fecha.format(
+        fecha.parse(entry.get('id'), 'YYYY-MM-DD'),
+        'MMMM DD, YYYY'
+    );
 
-    currentDate = fecha.format(activeDate, 'MMMM DD, YYYY');
+    console.warn('New content', entry.get('content'));
 
     return (
         <div styleName='edit-page'>
@@ -67,6 +57,7 @@ Editor = ({activeDate, entry} : EditorProps) => {
                 <MediumEditor
                     tag='pre'
                     styleName='edit-entry'
+                    text={entry.get('content') || ''}
                     options={
                         {
                             targetBlank: true,
@@ -77,8 +68,11 @@ Editor = ({activeDate, entry} : EditorProps) => {
                                 buttons: ['bold', 'italic', 'strikethrough', 'anchor', 'h2', 'orderedlist', 'unorderedlist', 'quote'],
                             },
                         }}
-                    onChange={function(content : string) {
-                        actions.changeEntryContent(entry.id, content);
+                    onChange={function handleChangeEntryContent(content : string) {
+                        actions.changeEntryContent({
+                            content,
+                            entry,
+                        });
                     }}
                 />
             </div>

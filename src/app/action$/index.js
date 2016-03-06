@@ -1,14 +1,14 @@
 import {
     Observable,
 } from 'rxjs';
-import activateDate$ from './activateDate';
+import changeActiveEntryId$ from './changeActiveEntryId';
 import changeEntryContent$ from './changeEntryContent';
 
 let action$;
 
 action$ = Observable.merge(
-    activateDate$,
-    changeEntryContent$
+    changeActiveEntryId$,
+    changeEntryContent$,
 );
 
 export default action$;

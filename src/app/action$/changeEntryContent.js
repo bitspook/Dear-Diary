@@ -1,5 +1,5 @@
 import {
-    CHANGE_ACTIVE_ENTRY_CONTENT,
+    CHANGE_ENTRY_CONTENT,
 } from '../actionTypes';
 import actionSelector from '../lib/actionSelector';
 import {
@@ -8,12 +8,15 @@ import {
 } from '../components/Editor';
 
 const changeEntryContent$ = actionSelector(editorAction$, editorActionTypes.CHANGE_ENTRY_CONTENT)
-    .debounceTime(500)
-    .map(({payload}) => {
-        return {
-            type: CHANGE_ACTIVE_ENTRY_CONTENT,
-            payload,
-        };
-    });
+          .debounceTime(500)
+          .map(({payload: {entry, content}}) => {
+              return {
+                  type: CHANGE_ENTRY_CONTENT,
+                  payload: {
+                      content,
+                      entry,
+                  },
+              };
+          });
 
 export default changeEntryContent$;
