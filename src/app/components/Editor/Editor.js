@@ -30,13 +30,17 @@ type EditorProps = {
     entry: Map
 }
 
+let lastEntryId;
+let shallFlushEditorDOM;
+
 let Editor = ({entry} : EditorProps) => {
     const currentDate = fecha.format(
         fecha.parse(entry.get('id'), 'YYYY-MM-DD'),
         'MMMM DD, YYYY'
     );
 
-    console.warn('New content', entry.get('content'));
+    shallFlushEditorDOM = lastEntryId !== entry.get('id');
+    lastEntryId = entry.get('id');
 
     return (
         <div styleName='edit-page'>
@@ -57,6 +61,7 @@ let Editor = ({entry} : EditorProps) => {
                 <MediumEditor
                     tag='pre'
                     styleName='edit-entry'
+                    flushEditorDOM={shallFlushEditorDOM}
                     text={entry.get('content') || ''}
                     options={
                         {
