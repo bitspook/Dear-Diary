@@ -1,0 +1,6 @@
+* Dear Diary
+Dear Diary is a React (Redux) based web app to assist writing and maintaining a diary.
+* Features
+Under construction
+* Main Purpose
+To act as a playground for my experiments. I am using RxJS to implement redux, with other redux friendly tools. I am trynig to come up with a better architectural theme for my work on React based apps, and am using this app as a playground for experimens. I try various technologies in this app, keep what works, revert back if it doesn't.
