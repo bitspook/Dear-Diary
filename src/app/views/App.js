@@ -4,9 +4,7 @@ import React, {
 } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from '../../styles/containers/app.scss';
-import {
-    Editor,
-} from '../components/Editor';
+
 import {
     ActivityBar,
 } from '../components/ActivityBar';
@@ -33,20 +31,13 @@ class App extends Component {
     };
 
     render() {
-        const {
-            activeEntry,
-        } = this.props;
-
         return (
             <div styleName='app'>
                 <ActivityBar />
 
                 <div styleName='content'>
-                    <Editor
-                        entry={activeEntry}
-                    />
+                    {this.props.children}
                 </div>
-
             </div>
         );
     }

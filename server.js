@@ -30,7 +30,7 @@ server.use(webpackDevMiddleware(bundler, {
 
 server.use(webpackHotMiddleware(bundler));
 
-server.get('/', function(req, res) {
+server.get('*', function(req, res) {
     res.sendFile(path.resolve(webpackConfig.devServer.contentBase, 'index.html'));
 });
 

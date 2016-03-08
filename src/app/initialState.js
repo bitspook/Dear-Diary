@@ -10,6 +10,7 @@ const state = {
     entries: Map({
         [newEntry.id]: Map(newEntry),
     }),
+    routing: Map(),
 };
 
 export default Map(state);

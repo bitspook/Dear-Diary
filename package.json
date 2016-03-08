@@ -47,6 +47,8 @@
     "react-datepicker": "^0.23.2",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
+    "react-router": "^2.0.0",
+    "react-router-redux": "^4.0.0",
     "redux": "^3.3.1",
     "redux-actions": "^0.9.1",
     "redux-batched-actions": "^0.1.2",

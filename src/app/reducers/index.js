@@ -26,4 +26,7 @@ export default {
             return state;
         }
     },
+    routing: createReducer('@@router/LOCATION_CHANGE', (state, action) => {
+        return state.merge(action.payload);
+    }),
 };
