@@ -19,6 +19,14 @@ import {
 const logger = createLogger({
     collapsed: true,
     logger: console,
+    stateTransformer: (nextState) => {
+        const entries = nextState.entries.toJS();
+
+        return {
+            ...nextState,
+            entries,
+        };
+    },
 });
 
 const reducer = compose(
