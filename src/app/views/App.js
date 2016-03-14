@@ -4,7 +4,9 @@ import React, {
 } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from '../../styles/containers/app.scss';
-
+import {
+    push,
+} from 'react-router-redux';
 import {
     ActivityBar,
 } from '../components/ActivityBar';
@@ -17,6 +19,7 @@ import action$ from '../action$';
 class App extends Component {
     static propTypes = {
         activeEntry: PropTypes.object.isRequired,
+        children: PropTypes.any,
         dispatch: PropTypes.func.isRequired,
     };
 

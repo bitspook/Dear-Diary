@@ -2,23 +2,24 @@ import {
     applyMiddleware,
     createStore,
     compose,
-} from 'redux';
-import {
     combineReducers,
-} from 'redux-immutable';
+} from 'redux';
 import reducers from './reducers';
-import state from './initialState';
 import createLogger from 'redux-logger';
 import {
     enableBatching,
 } from 'redux-batched-actions';
+import {
+    routerMiddleware,
+} from 'react-router-redux';
+import {
+    browserHistory,
+
+} from 'react-router';
 
 const logger = createLogger({
     collapsed: true,
     logger: console,
-    stateTransformer: (nextState) => {
-        return nextState.toJS();
-    },
 });
 
 const reducer = compose(
@@ -26,8 +27,12 @@ const reducer = compose(
     combineReducers
 )(reducers);
 
-const store = createStore(reducer, state, compose(
-    applyMiddleware(logger),
+
+const store = createStore(reducer, compose(
+    applyMiddleware(
+        logger,
+        routerMiddleware(browserHistory),
+    ),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 

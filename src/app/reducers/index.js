@@ -4,9 +4,13 @@ import {
     CHANGE_ENTRY_CONTENT,
     CREATE_NEW_ENTRY,
 } from '../actionTypes';
+import {
+    routerReducer,
+} from 'react-router-redux';
+import initialState from '../initialState';
 
 export default {
-    activeEntryId: createReducer(CHANGE_ACTIVE_ENTRY_ID),
+    activeEntryId: createReducer(CHANGE_ACTIVE_ENTRY_ID, initialState.activeEntryId),
     entries: (state, action) => {
         switch (action.type) {
 
@@ -23,10 +27,8 @@ export default {
             return newState;
 
         default:
-            return state;
+            return state || initialState.entries;
         }
     },
-    routing: createReducer('@@router/LOCATION_CHANGE', (state, action) => {
-        return state.merge(action.payload);
-    }),
+    routing: routerReducer,
 };

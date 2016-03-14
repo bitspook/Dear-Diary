@@ -1,18 +1,17 @@
 import {
     Map,
 } from 'immutable';
+import type {
+    AppProps
+} from '../typeDefinitions/AppProps';
 
-type AppProps = {
-    activeEntry: Map,
-};
-
-export default (state : Map): AppProps => {
-    const allEntries = state.get('entries');
-    const activeEntryId = state.get('activeEntryId');
+export default (state, props): AppProps => {
+    const allEntries = state.entries;
+    const activeEntryId = state.activeEntryId;
 
     const activeEntry = allEntries.get(activeEntryId);
 
     return {
-        activeEntry,
+        activeEntry
     };
 };

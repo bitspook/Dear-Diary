@@ -1,8 +1,7 @@
 import {
-    TypeEntry,
-} from '../typeDefinitions/entry';
+    Map,
+} from 'immutable';
 
 export type AppProps = {
-    activeDate: Date,
-    activeEntry: TypeEntry
+    activeEntry: Map
 };

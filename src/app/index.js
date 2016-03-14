@@ -5,29 +5,25 @@ import {
 import {
     Router,
     Route,
-    Redirect,
-    browserHistory,
+    IndexRedirect,
 } from 'react-router';
-import {
-    syncHistoryWithStore,
-} from 'react-router-redux';
 import App from './views/App';
 import Editor from './views/EditorView';
 import {
     Provider,
 } from 'react-redux';
 import store from './store';
+import history from './history';
+import fecha from 'fecha';
 
-const history = syncHistoryWithStore(browserHistory, store, {
-    selectLocationState: (state) => {
-        return state.get('routing').toJS();
-    },
-});
+const today = fecha.format(new Date(), 'YYYY-MM-DD');
 
 const Routes = (
     <Router history={history}>
         <Route path='/' component={App} >
-            <Route path='/:date' component={Editor} />
+            <IndexRedirect to={today} />
+            <Route path='archive' component={null} />
+            <Route path=':date' component={Editor} />
         </Route>
     </Router>
 );
