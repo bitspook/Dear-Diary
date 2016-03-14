@@ -98,13 +98,13 @@ $item-height: 20;
     composes: new-entry activity-active;
 }
 
-.all-entries {
+.archive {
     @include activity-position(1);
     @include icon-list-ul($color-activity-bar-item, $color-activity-bar-item-hover);
 
     composes: activity;
 }
 
-.all-entries-active {
-    composes: all-entries activity-active;
+.archive-active {
+    composes: archive activity-active;
 }
