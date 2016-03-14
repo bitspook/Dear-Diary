@@ -11,10 +11,10 @@ ActivityBar = () => (
     <div styleName='activity-bar'>
         <div styleName='activities'>
             <Link to='/' styleName='new-entry-active'>
-                <span styleName='tool-tip'>New Entry</span>
+                <span styleName='tool-tip'>Today</span>
             </Link>
             <Link to='/archive' styleName='all-entries'>
-                <span styleName='tool-tip'>Read All</span>
+                <span styleName='tool-tip'>Archive</span>
             </Link>
         </div>
     </div>
