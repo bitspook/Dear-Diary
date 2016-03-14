@@ -15,7 +15,7 @@ const createNewEntry = createAction(CREATE_NEW_ENTRY);
 
 const maybeCreateNewEntry$ = (changeActiveEntryId$) => changeActiveEntryId$
           .map(({payload: newEntryId}) => {
-              const oldEntry = store.getState().getIn(['entries', newEntryId]);
+              const oldEntry = store.getState().entries.get(newEntryId);
 
               if (!oldEntry) {
                   return Map(new Entry(fecha.parse(newEntryId, 'YYYY-MM-DD')));

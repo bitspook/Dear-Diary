@@ -1,18 +1,21 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import styles from '../../../styles/components/activity-bar.scss';
+import {
+    Link,
+} from 'react-router';
 
 let ActivityBar;
 
 ActivityBar = () => (
     <div styleName='activity-bar'>
         <div styleName='activities'>
-            <i styleName='new-entry-active'>
+            <Link to='/' styleName='new-entry-active'>
                 <span styleName='tool-tip'>New Entry</span>
-            </i>
-            <i styleName='all-entries'>
+            </Link>
+            <Link to='/archive' styleName='all-entries'>
                 <span styleName='tool-tip'>Read All</span>
-            </i>
+            </Link>
         </div>
     </div>
 );

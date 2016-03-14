@@ -17,6 +17,9 @@ import {
     createAction,
 } from 'redux-actions';
 import maybeCreateNewEntry from './maybeCreateNewEntry';
+import {
+    push,
+} from 'react-router-redux';
 
 const changeActiveEntryId = createAction(CHANGE_ACTIVE_ENTRY_ID);
 
@@ -26,7 +29,7 @@ const changeActiveEntryId$ = actionSelector(editorAction$, editorActionTypes.CHA
 
 const maybeCreateNewEntry$ = maybeCreateNewEntry(changeActiveEntryId$);
 
-const responsiblyChangeActiveEntryId$ = Observable.zip(
+const responsiblyChangeActiveEntry$ = Observable.zip(
     changeActiveEntryId$,
     maybeCreateNewEntry$,
     (changeIdAction, createEntryAction) => {
@@ -37,8 +40,19 @@ const responsiblyChangeActiveEntryId$ = Observable.zip(
             ]);
         }
 
-        return changeIdAction;
+        return batchActions([
+            changeIdAction,
+        ]);
     }
 );
 
-export default responsiblyChangeActiveEntryId$;
+const changeEntryAndLocation$ = responsiblyChangeActiveEntry$
+          .merge(
+              responsiblyChangeActiveEntry$
+                  .map((batchedAction) => {
+                      const date = batchedAction.payload[0].payload;
+                      return push(date);
+                  })
+          );
+
+export default changeEntryAndLocation$;

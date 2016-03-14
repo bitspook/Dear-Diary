@@ -14,7 +14,6 @@ import {
 } from 'react-router-redux';
 import {
     browserHistory,
-
 } from 'react-router';
 
 const logger = createLogger({
