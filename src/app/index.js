@@ -9,6 +9,7 @@ import {
 } from 'react-router';
 import App from './views/App';
 import Editor from './views/EditorView';
+import Archive from './views/Archive';
 import {
     Provider,
 } from 'react-redux';
@@ -22,7 +23,7 @@ const Routes = (
     <Router history={history}>
         <Route path='/' component={App} >
             <IndexRedirect to={today} />
-            <Route path='archive' component={null} />
+            <Route path='archive' component={Archive} />
             <Route path=':date' component={Editor} />
         </Route>
     </Router>

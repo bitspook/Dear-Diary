@@ -1,0 +1,29 @@
+@import '../colors';
+
+.archive {
+    background: transparent;
+
+    a {
+        text-decoration: none;
+        color: $color-archive-content;
+    }
+}
+
+.entries-list {
+    list-style: none;
+}
+
+.entry {
+    background: $color-archive-entry-bg;
+    padding: 20px;
+    box-shadow: #222 0px 0px 10px -5px;
+}
+
+.entry-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.entry-excerpt {
+    line-height: 1.5;
+}
