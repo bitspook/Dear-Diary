@@ -23,18 +23,28 @@ module.exports = {
         ]
     },
     module: {
-        loaders: [{
-            include: [path.resolve(__dirname, 'src')],
-            loader: 'babel',
-            babelrc: false,
-            query: {
-                presets: [
-                    'react',
-                    'es2015'
-                ]
+        loaders: [
+            {
+                babelrc: false,
+                include: [path.resolve(__dirname, 'src')],
+                loader: 'babel',
+                query: {
+                    presets: [
+                        'react',
+                        'es2015'
+                    ]
+                },
+                test: /\.js$/
             },
-            test: /\.js$/
-        }]
+            {
+                loaders: [
+                    'style?sourceMap',
+                    'css',
+                    'sass'
+                ],
+                test: /\.scss$/
+            }
+        ]
     },
     output: {
         filename: 'app.js',

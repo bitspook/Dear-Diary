@@ -52,6 +52,17 @@ This app will be/was built as a workshop project, so an effort is made to not us
 App has a single layout called "Main". All the views are rendered in the Main layout. Main layout consists of:
 
 - A thin vertical fixed sidebar on left which has following options.
+  Thin sidebar with icons for following options:
+
+  * New Entry
+    Opens "Edit Entry" view with today's date selected.
+
+  * Browse Entries
+    Opens "Browse Entries" view
+
+  * Connect with Dropbox
+    Redirects to Dropbox for generating access token. Access token is then stored locally and all changes are synced to Dropbox.
+
 - A content section which covers rest of the area. Content section changes per view.
 
 ** Views
@@ -96,21 +107,6 @@ Browse Entries view contains:
   * Clicking on the date opens the Edit Entry view with clicked date selected
 
 ** Components
-
-*** NavSidebar
-
-Thin sidebar with icons for following options:
-
-- New Entry
-  Opens "Edit Entry" view with today's date selected.
-
-- Browse Entries
-  Opens "Browse Entries" view
-
-- Connect with Dropbox
-  Redirects to Dropbox for generating access token. Access token is then stored locally and all changes are synced to Dropbox.
-
-All icons have popup tooltips.
 
 *** Calendar
 

@@ -1,0 +1,56 @@
+@import 'node_modules/normalize-scss/sass/normalize/import-now';
+@import 'src/scss/icons';
+@import 'src/scss/colors';
+
+.Main__container {
+    position: relative;
+    width: 100%;
+}
+
+.Main__sidebar {
+    position: absolute;
+    float: left;
+    width: 6%;
+    height: 100vh;
+    border-right: 1px solid $color-main-sidebar-border;
+}
+
+.Main__sidebar-list {
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    list-style-type: none;
+}
+
+.Main__sidebar-list-item {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 15px;
+    padding: 10px;
+    padding: 0;
+    cursor: pointer;
+}
+
+@mixin sidebar-item() {
+    background-position-x: 10px;
+
+    &:hover {
+        background-position-x: 10px;
+    }
+}
+
+.Main__sidebar-new-entry {
+    @include icon-pencil($color-sidebar-icon-bg, $color-sidebar-icon-bg-hover);
+    @include sidebar-item();
+}
+
+.Main__sidebar-browse-entries {
+    @include icon-list($color-sidebar-icon-bg, $color-sidebar-icon-bg-hover);
+    @include sidebar-item();
+}
+
+
+.Main__sidebar-dropbox {
+    @include icon-dropbox($color-sidebar-icon-bg, $color-sidebar-icon-bg-hover);
+    @include sidebar-item();
+}
