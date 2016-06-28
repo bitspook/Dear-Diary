@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const devServer = {
     contentBase: path.join(__dirname, 'dist'),
+    historyApiFallback: true,
     hot: true,
     noInfo: true,
     outputPath: path.join(__dirname, 'dist'),

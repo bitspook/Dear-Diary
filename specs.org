@@ -69,7 +69,7 @@ App has a single layout called "Main". All the views are rendered in the Main la
 
 *** Edit Entry
 
-*Url :* ~/entry/<YYYY:MM:DD>~
+*Url :* ~/entries/<YYYY:MM:DD>~
 
 Edit Entry view covers "New Entry", "Edit Entry" and "Read Entry" roles. This view consists of 3 vertically aligned parts in a single section:
 
@@ -84,7 +84,7 @@ Edit Entry view covers "New Entry", "Edit Entry" and "Read Entry" roles. This vi
 
 *** Browse Entries
 
-*Url :* ~/browse/<tag>~
+*Url :* ~/entries?tags=<tag>~
 
 Browse Entries view contains:
 

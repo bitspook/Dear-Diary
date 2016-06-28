@@ -10,7 +10,7 @@
 .Main__sidebar {
     position: absolute;
     float: left;
-    width: 6%;
+    width: 50px;
     height: 100vh;
     border-right: 1px solid $color-main-sidebar-border;
 }
@@ -49,8 +49,13 @@
     @include sidebar-item();
 }
 
-
 .Main__sidebar-dropbox {
     @include icon-dropbox($color-sidebar-icon-bg, $color-sidebar-icon-bg-hover);
     @include sidebar-item();
+}
+
+.Main__sidebar-list-item-active li {
+    border-right: 3px solid #000;
+    height: 35px;
+    width: 49px;
 }
