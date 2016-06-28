@@ -7,6 +7,13 @@
     width: 100%;
 }
 
+.Main__content {
+    position: relative;
+    left: 50px;
+    width: calc(100% - 50px);
+    overflow: hidden; // clear fix
+}
+
 .Main__sidebar {
     position: absolute;
     float: left;

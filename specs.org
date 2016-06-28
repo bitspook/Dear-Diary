@@ -77,7 +77,7 @@ Edit Entry view covers "New Entry", "Edit Entry" and "Read Entry" roles. This vi
   Date of the Entry being edited. Clicking on this opens a Calendar which allow switching date. Tags and Entry change accordingly on changing date.
 
 - *Tags*
-  A single row listing all the tags (or "No tags") current entryedit Tedalong with a "+" icon at the end to add new tags. Each tag is shown in a label with a "X" icon to its right to remove the tag.
+  A single row listing all the tags (or "No tags") current entryedit Tedalong with a transparently styled <input> at the end to add new tags. Each tag is shown in a label with a "X" icon to its right to remove the tag.
 
 - *Entry*
   Textarea with no borders and styled like a normal page which spans to complete height of rest of the page.

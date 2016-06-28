@@ -1,0 +1,29 @@
+.EditEntry__container {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.EditEntry__content {
+    width: 80%;
+    max-width: 980px;
+    margin: 30px auto;
+}
+
+.EditEntry__date {
+    margin: 0;
+    margin-bottom: 30px;
+    cursor: pointer;
+    font-size: 32px;
+}
+
+.EditEntry__tags-row {
+    margin-bottom: 40px;
+}
+
+.EditEntry__editor {
+    width: 100%;
+    height: 50vh;
+    border: none;
+    outline: none;
+}

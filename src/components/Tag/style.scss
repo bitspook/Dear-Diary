@@ -1,0 +1,50 @@
+@import 'src/scss/colors';
+@import 'src/scss/icons';
+
+.Tag__container {
+    margin-right: 20px;
+
+    &:hover .Tag__close-button {
+        display: inline;
+    }
+}
+
+.Tag__body {
+    font-size: 12px;
+    position: relative;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background: $color-tag-bg;
+
+    &:after {
+        position: absolute;
+        top: 0;
+        height: 0;
+        margin-left: 8px;
+        content: '.';
+        color: transparent;
+        border-top: 11px solid transparent;
+        border-right: 11px solid transparent;
+        border-bottom: 11px solid transparent;
+        border-left: 11px solid $color-tag-bg;
+    }
+}
+
+
+.Tag__close-button {
+    position: relative;
+    display: none;
+    margin-right: 10px;
+    cursor: pointer;
+
+    &:after {
+        margin-left: 3px;
+        width: 15px;
+        height: 15px;
+        content: '.';
+        color: transparent;
+        @include icon-close($color-tag-close-button, $color-tag-close-button);
+    }
+}
