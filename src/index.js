@@ -11,7 +11,7 @@ import {EditEntry, EditEntryActions} from './views/EditEntry';
 import BrowseEntries from './views/BrowseEntries';
 import createAppActions from './lib/createAppActions';
 
-const store = configureStore(initialState);
+const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
 const AppActions = createAppActions(

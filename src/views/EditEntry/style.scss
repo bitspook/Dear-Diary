@@ -35,3 +35,26 @@
     border: none;
     outline: none;
 }
+
+.EditEntry__modal-wrapper-hidden {
+    visibility: hidden;
+    height: 0;
+}
+
+.EditEntry__modal-wrapper-visible {
+    visibility: visible;
+    position: absolute;
+    width: calc(100% - 2px);
+    height: 100vh;
+    top: 0;
+    left: 2px;
+    right: 0;
+    bottom: 0;
+    background: rgba(#fff, 0.95);
+}
+
+.EditEntry__modal-content {
+    position: relative;
+    width: 600px;
+    margin: 50px auto;
+}

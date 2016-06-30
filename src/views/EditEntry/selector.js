@@ -20,5 +20,8 @@ export const mapStateToProps = (state, {params}) => {
         entry = new Error('Cannot write diary entry for future');
     }
 
-    return {entry};
+    return {
+        entry,
+        showCalendar: state.ui.showCalendar
+    };
 };

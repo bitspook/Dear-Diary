@@ -33,6 +33,13 @@ module.exports = {
             {
                 loaders: [
                     'style?sourceMap',
+                    'css'
+                ],
+                test: /\.css$/
+            },
+            {
+                loaders: [
+                    'style?sourceMap',
                     'css',
                     'sass'
                 ],

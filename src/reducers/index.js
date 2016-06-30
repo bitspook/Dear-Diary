@@ -21,11 +21,20 @@ export default {
                     body: action.body
                 }
             };
-
         }
 
         return state || initialState.entries;
-
     },
-    routing: routerReducer
+    routing: routerReducer,
+    ui: (state, action) => {
+        switch (action.type) {
+        case 'TOGGLE_CALENDAR_VISIBILITY':
+            return {
+                ...state,
+                showCalendar: !state.showCalendar
+            };
+        }
+
+        return state || initialState.ui;
+    }
 };

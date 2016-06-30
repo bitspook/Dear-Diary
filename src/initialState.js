@@ -1,5 +1,8 @@
 const initialState = {
-    entries: {}
+    entries: {},
+    ui: {
+        showCalendar: false
+    }
 };
 
 export default initialState;
