@@ -1,23 +1,81 @@
-import React, {PropTypes} from 'react';
-import {Tag, actions as TagActions} from '../Tag';
+import React, {Component, PropTypes} from 'react';
+import {Subject} from 'rxjs';
+import makeAction from '../../lib/makeAction';
+import {Tag, TagActions} from '../Tag';
+import {UPDATE_TAGS} from './actionTypes';
 import './style.scss';
 
-const addNewTag = (value) => {
-    console.warn(value);
-};
+const updateTagsActions = new Subject();
 
-export const TagsRow = ({tags}) => (
-    <div className='TagsRow__container'>
-        {tags.map((tag) => <Tag key={tag} value={tag} />)}
+class TagsRow extends Component {
+    static propTypes = {
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired
+    };
 
-        <input
-            className='TagsRow-new-tag-input'
-            placeholder='Add tag'
-            onKeyUp={addNewTag}
-        />
-    </div>
-);
+    constructor (props, context) {
+        super(props, context);
 
-TagsRow.propTypes = {
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
+        this.TagActionsSub = TagActions
+            .filter(({type}) => type === 'REMOVE_TAG')
+            .do()
+            .subscribe({
+                error: (err) => console.warn('Error while removing tag', err), // eslint-disable-line no-console
+                next: ({tag}) => {
+                    const remainingTags = this.props.tags.filter((oldTag) => oldTag !== tag);
+
+                    updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: remainingTags}));
+                }
+            });
+    }
+
+    componentWillUnmount = () => {
+        this.TagActionsSub.unsubscribe();
+    };
+
+    handleKeyUp = (event) => {
+        const tags = this.props.tags;
+        const keyCode = event.keyCode;
+        const isNewTag = (newTag) => tags.map((t) => t.toLowerCase())
+                                         .indexOf(newTag) === -1;
+        const newTags = event.target.value
+                             .toLowerCase()
+                             .split(',')
+                             .map((tag) => tag.trim())
+                             .filter((tag) => Boolean(tag)) // remove empty values
+                             .filter((tag, index, self) => self.indexOf(tag) === index) // remove duplicates
+                             .filter(isNewTag)
+                             .concat(tags);
+
+        if (keyCode === 13) {
+            updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: newTags}));
+        }
+
+        if (keyCode === 13 || keyCode === 27) {
+            event.target.value = '';
+            event.target.blur();
+        }
+    };
+
+    render () {
+        const tags = this.props.tags;
+
+        return (
+            <div className='TagsRow__container'>
+                {tags.map((tag) => <Tag key={tag} value={tag} />)}
+
+                <input
+                    className='TagsRow-new-tag-input'
+                    onKeyUp={this.handleKeyUp}
+                    placeholder='Add tag'
+                />
+            </div>
+        );
+    }
+}
+
+const TagsRowActions = updateTagsActions;
+
+export {
+    TagsRow,
+    TagsRowActions
 };

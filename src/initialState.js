@@ -1,3 +1,5 @@
-const initialState = {};
+const initialState = {
+    entries: {}
+};
 
 export default initialState;

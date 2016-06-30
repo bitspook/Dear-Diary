@@ -26,15 +26,8 @@ module.exports = {
     module: {
         loaders: [
             {
-                babelrc: false,
                 include: [path.resolve(__dirname, 'src')],
                 loader: 'babel',
-                query: {
-                    presets: [
-                        'react',
-                        'es2015'
-                    ]
-                },
                 test: /\.js$/
             },
             {

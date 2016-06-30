@@ -7,11 +7,21 @@ import moment from 'moment';
 import initialState from './initialState';
 import configureStore from './configureStore';
 import Main from './views/Main';
-import EditEntry from './views/EditEntry';
+import {EditEntry, EditEntryActions} from './views/EditEntry';
 import BrowseEntries from './views/BrowseEntries';
+import createAppActions from './lib/createAppActions';
 
 const store = configureStore(initialState);
 const history = syncHistoryWithStore(browserHistory, store);
+
+const AppActions = createAppActions(
+    EditEntryActions(store.getState)
+);
+
+AppActions
+    .subscribe((action) => {
+        store.dispatch(action);
+    });
 
 ReactDOM.render(<Provider store={store}>
     <Router history={history}>

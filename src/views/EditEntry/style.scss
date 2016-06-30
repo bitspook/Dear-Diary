@@ -1,7 +1,15 @@
+@import 'src/scss/colors';
+
 .EditEntry__container {
     float: left;
     position: relative;
     width: 100%;
+}
+
+.EditEntry__error {
+    padding: 20px 10px;
+    color: $color-edit-entry-error;
+    border: 1px solid $color-edit-entry-error-border;
 }
 
 .EditEntry__content {

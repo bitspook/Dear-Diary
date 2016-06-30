@@ -33,6 +33,6 @@ Main.propTypes = {
     children: PropTypes.element.isRequired
 };
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps)(Main);

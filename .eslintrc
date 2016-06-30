@@ -139,26 +139,6 @@
         "global-require": 2,
         "guard-for-in": 2,
         "handle-callback-err": 2,
-        "id-length": [
-            1,
-            {
-                "exceptions": [
-                    "P",
-                    "$",
-                    "_"
-                ],
-                "max": 50,
-                "min": 2
-            }
-        ],
-        "id-match": [
-            2,
-            "(^[A-Za-z]+(?:[A-Z][a-z]*)*\\d*$)|(^[A-Z]+(_[A-Z]+)*(_\\d$)*$)|(^(_|\\$)$)",
-            {
-                "onlyDeclarations": true,
-                "properties": true
-            }
-        ],
         "import/default": 2,
         "import/export": 2,
         "import/extensions": [
@@ -204,17 +184,10 @@
                 "newlines-between": "never"
             }
         ],
-        "import/prefer-default-export": 2,
+        "import/prefer-default-export": 0,
         "indent": [
             2,
             4
-        ],
-        "init-declarations": [
-            2,
-            "never",
-            {
-                "ignoreForLoopInit": false
-            }
         ],
         "jsx-quotes": [
             1,
@@ -307,7 +280,6 @@
         "no-implicit-coercion": 2,
         "no-implicit-globals": 0,
         "no-implied-eval": 2,
-        "no-inline-comments": 2,
         "no-inner-declarations": 2,
         "no-invalid-regexp": 2,
         "no-invalid-this": 0,

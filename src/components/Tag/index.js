@@ -1,23 +1,35 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Subject} from 'rxjs';
+import makeAction from '../../lib/makeAction';
+import {REMOVE_TAG} from './actionTypes';
 import './style.scss';
 
-export const actions = new Subject();
+const removeTagActions = new Subject();
 
-const removeTag = (tag) => () => actions.next({
-    tag,
-    type: 'REMOVE'
-});
+class Tag extends Component {
+    static propTypes = {
+        value: PropTypes.string.isRequired
+    }
 
-export const Tag = ({value}) => (
-    <span className='Tag__container'>
-        <span className='Tag__body'>
-            {value}
-            <span className='Tag__close-button' onClick={removeTag(value)}></span>
-        </span>
-    </span>
-);
+    handleRemoveTag = () => removeTagActions.next(makeAction(REMOVE_TAG, {tag: this.props.value}));
 
-Tag.propTypes = {
-    value: PropTypes.string.isRequired
+    render () {
+        const value = this.props.value;
+
+        return (
+            <span className='Tag__container'>
+                <span className='Tag__body'>
+                    {value}
+                    <span className='Tag__close-button' onClick={this.handleRemoveTag}></span>
+                </span>
+            </span>
+        );
+    }
+}
+
+const TagActions = removeTagActions;
+
+export {
+    Tag,
+    TagActions
 };
