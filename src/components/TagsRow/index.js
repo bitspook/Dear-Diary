@@ -1,36 +1,26 @@
 import React, {Component, PropTypes} from 'react';
 import {Subject} from 'rxjs';
 import makeAction from '../../lib/makeAction';
+import ChildActions from '../../high-component/ChildActions';
 import {Tag, TagActions} from '../Tag';
 import {UPDATE_TAGS} from './actionTypes';
 import './style.scss';
 
 const updateTagsActions = new Subject();
 
+@ChildActions(TagActions)
 class TagsRow extends Component {
     static propTypes = {
         tags: PropTypes.arrayOf(PropTypes.string).isRequired
     };
 
-    constructor (props, context) {
-        super(props, context);
+    static handleChildActions = (props, childActions) => childActions
+        .filter(({type}) => type === 'REMOVE_TAG')
+        .do(({tag}) => {
+            const remainingTags = props.tags.filter((oldTag) => oldTag !== tag);
 
-        this.TagActionsSub = TagActions
-            .filter(({type}) => type === 'REMOVE_TAG')
-            .do()
-            .subscribe({
-                error: (err) => console.warn('Error while removing tag', err), // eslint-disable-line no-console
-                next: ({tag}) => {
-                    const remainingTags = this.props.tags.filter((oldTag) => oldTag !== tag);
-
-                    updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: remainingTags}));
-                }
-            });
-    }
-
-    componentWillUnmount = () => {
-        this.TagActionsSub.unsubscribe();
-    };
+            updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: remainingTags}));
+        });
 
     handleKeyUp = (event) => {
         const tags = this.props.tags;

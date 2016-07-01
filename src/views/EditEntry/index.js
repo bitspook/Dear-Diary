@@ -3,18 +3,21 @@ import moment from 'moment';
 import {connect} from 'react-redux';
 import {Subject} from 'rxjs';
 import InfiniteCalendar from 'react-infinite-calendar';
+import {push} from 'react-router-redux';
 import 'react-infinite-calendar/styles.css';
 import makeAction from '../../lib/makeAction';
 import {TagsRow, TagsRowActions} from '../../components/TagsRow';
+import ChildActions from '../../high-component/ChildActions';
 import {UPDATE_ENTRY_BODY, UPDATE_ENTRY_TAGS, TOGGLE_CALENDAR_VISIBILITY} from './actionTypes';
 import {mapStateToProps} from './selector';
-import {push} from 'react-router-redux';
 import calendarTheme from './calendarTheme';
 import './style.scss';
 
 const Actions = new Subject();
 
-class EditEntryComponent extends Component {
+@connect(mapStateToProps)
+@ChildActions(TagsRowActions)
+class EditEntry extends Component {
     static propTypes = {
         entry: PropTypes.oneOfType([
             PropTypes.shape({
@@ -27,26 +30,13 @@ class EditEntryComponent extends Component {
         showCalendar: PropTypes.bool.isRequired
     };
 
-    constructor (props, context) {
-        super(props, context);
-
-        const entry = props.entry;
-
-        this.TagsRowActionsSub = TagsRowActions
-            .filter(({type}) => type === 'UPDATE_TAGS')
-            .map(({tags}) => makeAction(UPDATE_ENTRY_TAGS, {
-                entry,
-                tags
-            }))
-            .subscribe({
-                error: (err) => console.warn('Error in TagsRowActions', err), // eslint-disable-line no-console
-                next: (action) => Actions.next(action)
-            });
-    }
-
-    componentWillUnmount = () => {
-        this.TagsRowActionsSub.unsubscribe();
-    };
+    static handleChildActions = (props, childActions) => childActions
+        .filter(({type}) => type === 'UPDATE_TAGS')
+        .map(({tags}) => makeAction(UPDATE_ENTRY_TAGS, {
+            entry: props.entry,
+            tags
+        }))
+        .do((action) => Actions.next(action));
 
     handleChangeTextarea = (event) => {
         const body = event.target.value;
@@ -130,8 +120,6 @@ class EditEntryComponent extends Component {
         );
     }
 }
-
-const EditEntry = connect(mapStateToProps)(EditEntryComponent);
 
 const EditEntryActions = () => Actions;
 

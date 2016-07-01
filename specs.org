@@ -34,9 +34,7 @@ This app will be/was built as a workshop project, so an effort is made to not us
 - Encryption (encrypting entries before storing them in Dropbox)
 - Tags for individual (user-selectable) sentences in diary entry
 - Select multiple tags when browsing entries by tag
-
 * Details
-
 ** Flow
 
 - User lands on "Edit Entry" view with today's date selected.
@@ -46,7 +44,11 @@ This app will be/was built as a workshop project, so an effort is made to not us
 - User can click on visible date in "Edit Entry" view to change to entry for another date
 - User can click on "Browse" option in sidebar to browse all entries by tag; i.e user changes to "Browse Entries" view
 - User can click on "Connect with Dropbox" option in sidebar to connect the app with Dropbox. Once connected, every edit will be saved to Dropbox
-
+** Models
+*** Entry
+- date :: moment
+- body :: String
+- tags :: [String]
 ** Main Layout
 
 App has a single layout called "Main". All the views are rendered in the Main layout. Main layout consists of:
@@ -64,9 +66,7 @@ App has a single layout called "Main". All the views are rendered in the Main la
     Redirects to Dropbox for generating access token. Access token is then stored locally and all changes are synced to Dropbox.
 
 - A content section which covers rest of the area. Content section changes per view.
-
 ** Views
-
 *** Edit Entry
 
 *Url :* ~/entries/<YYYY:MM:DD>~
@@ -82,6 +82,17 @@ Edit Entry view covers "New Entry", "Edit Entry" and "Read Entry" roles. This vi
 - *Entry*
   Textarea with no borders and styled like a normal page which spans to complete height of rest of the page.
 
+**** Details
+***** Props
+- entry :: Entry
+***** Selector
+- Try to parse date in url params
+  - If valid, try to get entry from state
+    - If found, return the entry in props
+    - If not found, create an empty entry and return it in props. Do not save it in state
+  - If invalid, return an ~Error~ object as entry prop. Entry is invalid for following reasons
+    - Unable to parse date in URL : When date in url is an invalid string
+    - Cannot write diary entry for future : When date in url is in future
 *** Browse Entries
 
 *Url :* ~/entries?tags=<tag>~
@@ -105,17 +116,36 @@ Browse Entries view contains:
   * Entries are listed in chronological order
   * Each entry is displayed as its date as header, a list of tags, and a 300 word excerpt from the body.
   * Clicking on the date opens the Edit Entry view with clicked date selected
-
 ** Components
-
 *** Calendar
 
 Calendar view that pops up when user click on date in "Edit Entry" view. Use [[https://github.com/clauderic/react-infinite-calendar][react-infinite-calendar]]
-
 *** SelectList
 
 List of selectable items with a search option. Used for "Filter by Tags" column in "Browse Entries" view
-
 *** TagsRow
-
-Row of removable tags with "Add Tag" button used in "Edit Entry" view to show tags of an entry.
+:PROPERTIES:
+:ID:       41E370C2-4C5B-4FB9-82B9-053CD463C2A6
+:END:
+**** Props
+- tags :: [String]
+**** View
+- List of [[id:D8759C56-3C58-4CB8-9499-E0DEED5C0052][Tag]]s
+- Transparently styled <input>. On click:
+  - If user has entered a valid string, check if duplicate, if not, emit ~ADD_TAG~ action on pressing Enter.
+  - On pressing Esc or Enter with empty input or input is duplicate, <input> blurs
+**** Actions emitted
+- REMOVE_TAG (tag : String)
+- ADD_TAG (tag : String)
+**** Subcomponents
+***** [[id:D8759C56-3C58-4CB8-9499-E0DEED5C0052][Tag]]
+*** Tag
+:PROPERTIES:
+:ID:       D8759C56-3C58-4CB8-9499-E0DEED5C0052
+:END:
+**** Props
+- tag :: String
+**** View
+- A label which shows the tag and have a ~X~ icon on the right which emits ~REMOVE~ action on click
+**** Actions emitted
+- REMOVE (tag : String)
