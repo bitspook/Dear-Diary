@@ -26,6 +26,13 @@ export default {
         return state || initialState.entries;
     },
     routing: routerReducer,
+    tags: (state, action) => {
+        if (action.type === 'UPDATE_TAGS') {
+            return action.tags;
+        }
+
+        return state || initialState.tags;
+    },
     ui: (state, action) => {
         switch (action.type) {
         case 'TOGGLE_CALENDAR_VISIBILITY':

@@ -1,5 +1,6 @@
 const initialState = {
     entries: {},
+    tags: [],
     ui: {
         showCalendar: false
     }

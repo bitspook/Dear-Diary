@@ -95,26 +95,29 @@ class EditEntry extends Component {
                         value={entry.body}
                     />
 
-                    <div
-                        className={'EditEntry__modal-wrapper' + (showCalendar ? '-visible' : '-hidden')}
-                        onClick={this.handleClickOutsideCalendar}
-                    >
-                        <div className='EditEntry__modal-content' onClick={function (e) { e.stopPropagation(); }}>
-                            <InfiniteCalendar
-                                disabledDays={[0, 6]}
-                                height={600}
-                                hideYearsOnSelect={false}
-                                keyboardSupport={false}
-                                max={moment().add(10, 'days')}
-                                maxDate={moment()}
-                                onSelect={this.handleSelectDate}
-                                selectedDate={entry.date}
-                                shouldHeaderAnimate={false}
-                                theme={calendarTheme}
-                                width={600}
-                            />
-                        </div>
-                    </div>
+                    {showCalendar ?
+                        <div
+                            className={'EditEntry__modal-wrapper-visible'}
+                            onClick={this.handleClickOutsideCalendar}
+                        >
+                            <div className='EditEntry__modal-content' onClick={function (e) { e.stopPropagation(); }}>
+                                <InfiniteCalendar
+                                    disabledDays={[0, 6]}
+                                    height={600}
+                                    hideYearsOnSelect={false}
+                                    keyboardSupport={false}
+                                    max={moment().add(10, 'days')}
+                                    maxDate={moment()}
+                                    onSelect={this.handleSelectDate}
+                                    selectedDate={entry.date}
+                                    shouldHeaderAnimate={false}
+                                    theme={calendarTheme}
+                                    width={600}
+                                />
+                            </div>
+                        </div> :
+                        null
+                    }
                 </div>
             </div>
         );

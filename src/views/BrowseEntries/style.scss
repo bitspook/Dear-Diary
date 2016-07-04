@@ -1,0 +1,73 @@
+@import "src/scss/colors";
+@import "src/scss/icons";
+
+.BrowseEntries__container {
+    overflow: hidden; // clear-fix
+    position: relative;
+}
+
+.BrowseEntries__tags {
+    position: relative;
+    float: left;
+    width: 30%;
+    height: 100vh;
+    background: #ddd;
+}
+
+.BrowseEntries__entries {
+    position: relative;
+    float: left;
+    width: 70%;
+    height: 100vh;
+}
+
+.BrowseEntries__entries-list {
+    position: relative;
+    width: 80%;
+    margin: 20px auto;
+    padding: 0;
+    list-style-type: none;
+}
+
+.BrowseEntries__entries-list-item {
+    margin-bottom: 30px;
+}
+
+.BrowseEntries__entries-header {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 28px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.BrowseEntries__entries-tags {
+    position: relative;
+    color: $color-browse-entries-tags;
+
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: lowercase;
+    left: 18px;
+
+    &::before {
+        @include icon-tags($color-browse-entries-tags);
+        content: '.';
+        color: transparent;
+        left: -18px;
+        top: 2px;
+        width: 15px;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.BrowseEntries__entries-excerpt {
+
+}

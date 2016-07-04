@@ -17,7 +17,7 @@
 .Main__sidebar {
     position: absolute;
     float: left;
-    width: 50px;
+    width: 49px;
     height: 100vh;
     border-right: 1px solid $color-main-sidebar-border;
 }
@@ -64,5 +64,5 @@
 .Main__sidebar-list-item-active li {
     border-right: 3px solid #000;
     height: 35px;
-    width: 49px;
+    width: 48px;
 }
