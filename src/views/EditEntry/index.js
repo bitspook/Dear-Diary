@@ -1,19 +1,25 @@
 import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import InfiniteCalendar from 'react-infinite-calendar';
 import {push} from 'react-router-redux';
 import 'react-infinite-calendar/styles.css';
 import makeAction from '../../lib/makeAction';
 import {TagsRow, TagsRowActions} from '../../components/TagsRow';
 import ChildActions from '../../high-component/ChildActions';
-import {UPDATE_ENTRY_BODY, UPDATE_ENTRY_TAGS, TOGGLE_CALENDAR_VISIBILITY} from './actionTypes';
+import {UPDATE_TAGS, UPDATE_ENTRY_BODY, UPDATE_ENTRY_TAGS, TOGGLE_CALENDAR_VISIBILITY} from './actionTypes';
 import {mapStateToProps} from './selector';
 import calendarTheme from './calendarTheme';
 import './style.scss';
 
-const Actions = new Subject();
+const NavigationActions = new Subject();
+const UpdateEntryBodyActions = new Subject();
+const UpdateEntryTagsActions = new Subject();
+const UIActions = new Subject();
+
+const UpdateGlobalTagsActions = UpdateEntryTagsActions
+    .map(({tags}) => makeAction(UPDATE_TAGS, {tags}));
 
 @connect(mapStateToProps)
 @ChildActions(TagsRowActions)
@@ -36,23 +42,23 @@ class EditEntry extends Component {
             entry: props.entry,
             tags
         }))
-        .do((action) => Actions.next(action));
+        .do((action) => UpdateEntryTagsActions.next(action));
 
     handleChangeTextarea = (event) => {
         const body = event.target.value;
 
-        Actions.next(makeAction(UPDATE_ENTRY_BODY, {
+        UpdateEntryBodyActions.next(makeAction(UPDATE_ENTRY_BODY, {
             body,
             entry: this.props.entry
         }));
     };
 
     handleClickDate = () => {
-        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     handleClickOutsideCalendar = () => {
-        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     handleSelectDate = (selectedDate) => {
@@ -60,8 +66,8 @@ class EditEntry extends Component {
             return;
         }
 
-        Actions.next(push('/entries/' + selectedDate.format('YYYY-MM-DD')));
-        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        NavigationActions.next(push('/entries/' + selectedDate.format('YYYY-MM-DD')));
+        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     render () {
@@ -124,7 +130,13 @@ class EditEntry extends Component {
     }
 }
 
-const EditEntryActions = () => Actions;
+const EditEntryActions = () => Observable.merge(
+    NavigationActions,
+    UIActions,
+    UpdateEntryBodyActions,
+    UpdateEntryTagsActions,
+    UpdateGlobalTagsActions
+);
 
 export {
     EditEntry,

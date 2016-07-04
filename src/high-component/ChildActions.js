@@ -4,6 +4,8 @@ export default (...childActions) => (ChildComponent) => class ChldActionsWrapper
     constructor (props, context) {
         super(props, context);
 
+        console.warn('Got props', props);
+
         if (typeof ChildComponent.handleChildActions !== 'function') {
             console.warn(ChildComponent.name, 'component must provide a static `handleChildActions` function'); // eslint-disable-line no-console
 

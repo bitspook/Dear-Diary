@@ -28,7 +28,10 @@ export default {
     routing: routerReducer,
     tags: (state, action) => {
         if (action.type === 'UPDATE_TAGS') {
-            return action.tags;
+            return action
+                .tags
+                .concat(state.tags)
+                .filter((tag, index, self) => self.indexOf(tag) === index); // remove duplicates
         }
 
         return state || initialState.tags;
