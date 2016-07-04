@@ -30,7 +30,7 @@ export default {
         if (action.type === 'UPDATE_TAGS') {
             return action
                 .tags
-                .concat(state.tags)
+                .concat(state)
                 .filter((tag, index, self) => self.indexOf(tag) === index); // remove duplicates
         }
 
