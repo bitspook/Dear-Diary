@@ -1,0 +1,52 @@
+.SelectList__container {
+    position: relative;
+    width: 100%;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+.SelectList__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.SelectList__search-input {
+    font-size: 13px;
+    width: calc(100% - 20px);
+    margin: 10px 5px;
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    outline: none;
+}
+
+.SelectList__list-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid #ddd;
+    background: #eee;
+
+    &:hover {
+        border-bottom: 1px solid #ccc;
+        background: #ddd;
+    }
+}
+
+.SelectList__list-item-active {
+    li {
+        color: #fff;
+        border-bottom: 1px solid #000;
+        background: #000;
+
+        &:hover {
+            color: #eee;
+            border-bottom: 1px solid #000;
+            background: #555;
+        }
+    }
+}
