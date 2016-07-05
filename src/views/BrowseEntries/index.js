@@ -6,14 +6,15 @@ import {SelectList} from '../../components/SelectList';
 import './style.scss';
 
 const mapStateToProps = (state, {location: {query}}) => {
-    const tag = query.tag || null;
+    const filterTag = query.tag || null;
     const entries = Object.keys(state.entries)
                           .sort()
                           .map((k) => state.entries[k]);
 
     return {
         entries,
-        tag
+        filterTag,
+        tags: state.tags
     };
 };
 
@@ -25,18 +26,30 @@ class BrowseEntries extends Component {
             date: PropTypes.instanceOf(moment).isRequired,
             tags: PropTypes.arrayOf(PropTypes.string).isRequired
         })).isRequired,
-        tag: PropTypes.string
+        filterTag: PropTypes.string,
+        tags: PropTypes.arrayOf(PropTypes.string)
     };
 
     render () {
-        const entries = this.props.entries;
+        const filterTag = this.props.filterTag;
+        const entries = filterTag ?
+                        this.props.entries.filter((e) => e.tags.includes(filterTag)) :
+                        this.props.entries;
+        const tags = this.props.tags;
 
         return <div className='BrowseEntries__container'>
             <div className='BrowseEntries__tags'>
-                <SelectList />
+                <h3>Filter by Tags</h3>
+
+                {tags.length ?
+                    <SelectList items={tags} /> :
+                    <div className='BrowseEntries__no-tags-message'>No tagged entries present.</div>}
             </div>
+
             <div className='BrowseEntries__entries'>
                 <ul className='BrowseEntries__entries-list'>
+                    {entries.length === 0 ? <div>No entries found.</div> : null}
+
                     {/* eslint-disable prefer-arrow-callback */}
                     {entries.map(function (e) {
                         return (

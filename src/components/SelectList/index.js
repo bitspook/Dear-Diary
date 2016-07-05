@@ -35,6 +35,13 @@ class SelectList extends Component {
                     />
                 </li>
 
+                <Link
+                    key='all'
+                    to='/entries'
+                >
+                    <li className='SelectList__list-item'>All</li>
+                </Link>
+
                 {/* eslint-disable prefer-arrow-callback */}
                 {items.sort().map(function (item) {
                     return (

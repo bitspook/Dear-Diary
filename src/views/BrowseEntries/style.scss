@@ -9,9 +9,20 @@
 .BrowseEntries__tags {
     position: relative;
     float: left;
-    width: 30%;
+    width: calc(30% - 1px);
     height: 100vh;
-    background: #ddd;
+    background: rgba(#eee, 0.5);
+
+    h3 {
+        font-size: 16px;
+        margin: 10px;
+        margin-bottom: 0;
+    }
+}
+
+.BrowseEntries__no-tags-message {
+    margin: 10px;
+    font-size: 14px;
 }
 
 .BrowseEntries__entries {
