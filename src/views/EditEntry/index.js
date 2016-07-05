@@ -108,7 +108,6 @@ class EditEntry extends Component {
                         >
                             <div className='EditEntry__modal-content' onClick={function (e) { e.stopPropagation(); }}>
                                 <InfiniteCalendar
-                                    disabledDays={[0, 6]}
                                     height={600}
                                     hideYearsOnSelect={false}
                                     keyboardSupport={false}
