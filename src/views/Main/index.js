@@ -21,8 +21,6 @@ const Main = ({children}) => (
                 >
                     <li className='Main__sidebar-list-item Main__sidebar-browse-entries'></li>
                 </Link>
-
-                <li className='Main__sidebar-list-item Main__sidebar-dropbox'></li>
             </ul>
         </div>
         <div className='Main__content'>{children}</div>
