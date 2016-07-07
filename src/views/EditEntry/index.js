@@ -6,7 +6,7 @@ import InfiniteCalendar from 'react-infinite-calendar';
 import {push} from 'react-router-redux';
 import 'react-infinite-calendar/styles.css';
 import makeAction from '../../lib/makeAction';
-import {TagsRow, TagsRowActions} from '../../components/TagsRow';
+import {EditableTagsRow, EditableTagsRowActions} from '../../components/EditableTagsRow';
 import ChildActions from '../../high-component/ChildActions';
 import {UPDATE_TAGS, UPDATE_ENTRY_BODY, UPDATE_ENTRY_TAGS, TOGGLE_CALENDAR_VISIBILITY} from './actionTypes';
 import {mapStateToProps} from './selector';
@@ -22,7 +22,7 @@ const UpdateGlobalTagsActions = UpdateEntryTagsActions
     .map(({tags}) => makeAction(UPDATE_TAGS, {tags}));
 
 @connect(mapStateToProps)
-@ChildActions(TagsRowActions)
+@ChildActions(EditableTagsRowActions)
 class EditEntry extends Component {
     static propTypes = {
         entry: PropTypes.oneOfType([
@@ -92,7 +92,7 @@ class EditEntry extends Component {
                         onClick={this.handleClickDate}
                     >{entry.date.format('dddd MMMM DD, YYYY')}</h1>
 
-                    <div className='EditEntry__tags-row'><TagsRow tags={entry.tags} /></div>
+                    <div className='EditEntry__tags-row'><EditableTagsRow tags={entry.tags} /></div>
 
                     <textarea
                         className='EditEntry__editor'

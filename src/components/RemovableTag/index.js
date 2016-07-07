@@ -6,7 +6,7 @@ import './style.scss';
 
 const removeTagActions = new Subject();
 
-class Tag extends Component {
+class RemovableTag extends Component {
     static propTypes = {
         value: PropTypes.string.isRequired
     }
@@ -27,9 +27,9 @@ class Tag extends Component {
     }
 }
 
-const TagActions = removeTagActions;
+const RemovableTagActions = removeTagActions;
 
 export {
-    Tag,
-    TagActions
+    RemovableTag,
+    RemovableTagActions
 };

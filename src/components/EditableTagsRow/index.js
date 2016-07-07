@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import {Subject} from 'rxjs';
 import makeAction from '../../lib/makeAction';
 import ChildActions from '../../high-component/ChildActions';
-import {Tag, TagActions} from '../Tag';
+import {RemovableTag, RemovableTagActions} from '../RemovableTag';
 import {UPDATE_TAGS} from './actionTypes';
 import './style.scss';
 
 const updateTagsActions = new Subject();
 
-@ChildActions(TagActions)
-class TagsRow extends Component {
+@ChildActions(RemovableTagActions)
+class EditableTagsRow extends Component {
     static propTypes = {
         tags: PropTypes.arrayOf(PropTypes.string).isRequired
     };
@@ -51,7 +51,7 @@ class TagsRow extends Component {
 
         return (
             <div className='TagsRow__container'>
-                {tags.map((tag) => <Tag key={tag} value={tag} />)}
+                {tags.map((tag) => <RemovableTag key={tag} value={tag} />)}
 
                 <input
                     className='TagsRow-new-tag-input'
@@ -63,9 +63,9 @@ class TagsRow extends Component {
     }
 }
 
-const TagsRowActions = updateTagsActions;
+const EditableTagsRowActions = updateTagsActions;
 
 export {
-    TagsRow,
-    TagsRowActions
+    EditableTagsRow,
+    EditableTagsRowActions
 };

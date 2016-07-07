@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router';
 import './style.scss';
 
-class SelectList extends Component {
+class FilterTagsList extends Component {
     static propTypes = {
         items: PropTypes.arrayOf(PropTypes.any),
         title: PropTypes.string
@@ -61,5 +61,5 @@ class SelectList extends Component {
 }
 
 export {
-    SelectList
+    FilterTagsList
 };

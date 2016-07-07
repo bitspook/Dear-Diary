@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import moment from 'moment';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {SelectList} from '../../components/SelectList';
+import {FilterTagsList} from '../../components/FilterTagsList';
 import './style.scss';
 
 const mapStateToProps = (state, {location: {query}}) => {
@@ -42,7 +42,7 @@ class BrowseEntries extends Component {
                 <h3>Filter by Tags</h3>
 
                 {tags.length ?
-                    <SelectList items={tags} /> :
+                    <FilterTagsList items={tags} /> :
                     <div className='BrowseEntries__no-tags-message'>No tagged entries present.</div>}
             </div>
 

@@ -8,7 +8,7 @@ import initialState from './initialState';
 import configureStore from './configureStore';
 import Main from './views/Main';
 import {EditEntry, EditEntryActions} from './views/EditEntry';
-import {BrowseEntries, BrowseEntriesActions} from './views/BrowseEntries';
+import {BrowseEntries} from './views/BrowseEntries';
 import createAppActions from './lib/createAppActions';
 
 const store = configureStore(initialState, browserHistory);
