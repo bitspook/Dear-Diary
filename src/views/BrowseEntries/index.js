@@ -9,6 +9,7 @@ const mapStateToProps = (state, {location: {query}}) => {
     const filterTag = query.tag || null;
     const entries = Object.keys(state.entries)
                           .sort()
+                          .reverse()
                           .map((k) => state.entries[k]);
 
     return {
