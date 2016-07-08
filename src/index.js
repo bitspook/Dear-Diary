@@ -7,14 +7,15 @@ import moment from 'moment';
 import initialState from './initialState';
 import configureStore from './configureStore';
 import Main from './views/Main';
-import {EditEntry, EditEntryActions} from './views/EditEntry';
+import {EditEntry} from './views/EditEntry';
 import {BrowseEntries} from './views/BrowseEntries';
 import createAppActions from './lib/createAppActions';
+import actionCreator from './actionCreators';
 
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
-const AppActions = createAppActions(EditEntryActions);
+const AppActions = createAppActions(actionCreator(store.getState));
 
 AppActions
     .subscribe((action) => {

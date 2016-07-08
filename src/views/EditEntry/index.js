@@ -90,9 +90,9 @@ class EditEntry extends Component {
 
                     <textarea
                         className='EditEntry__editor'
+                        defaultValue={entry.body}
                         onChange={this.handleChangeTextarea}
                         placeholder='Dear Diary,'
-                        value={entry.body}
                     />
 
                     {showCalendar ?
