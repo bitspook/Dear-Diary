@@ -4,7 +4,7 @@ import initialState from '../initialState';
 export default {
     entries: (state, action) => {
         switch (action.type) {
-        case ('UPDATE_ENTRY_TAGS'):
+        case 'UPDATE_ENTRY_TAGS':
             return {
                 ...state,
                 [action.entry.date.format('YYYY-MM-DD')]: {
@@ -27,11 +27,14 @@ export default {
     },
     routing: routerReducer,
     tags: (state, action) => {
-        if (action.type === 'UPDATE_TAGS') {
-            return action
-                .tags
-                .concat(state)
+        switch (action.type) {
+        case 'ADD_GLOBAL_TAGS':
+            return state
+                .concat(action.tags)
                 .filter((tag, index, self) => self.indexOf(tag) === index); // remove duplicates
+
+        case 'REMOVE_GLOBAL_TAGS':
+            return state.filter((tag) => !action.tags.includes(tag));
         }
 
         return state || initialState.tags;
