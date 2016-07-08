@@ -13,13 +13,7 @@ import {mapStateToProps} from './selector';
 import calendarTheme from './calendarTheme';
 import './style.scss';
 
-const NavigationActions = new Subject();
-const UpdateEntryBodyActions = new Subject();
-const UpdateEntryTagsActions = new Subject();
-const UIActions = new Subject();
-
-const UpdateGlobalTagsActions = UpdateEntryTagsActions
-    .map(({tags}) => makeAction(UPDATE_TAGS, {tags}));
+const Actions = new Subject();
 
 @connect(mapStateToProps)
 @ChildActions(EditableTagsRowActions)
@@ -42,23 +36,23 @@ class EditEntry extends Component {
             entry: props.entry,
             tags
         }))
-        .do((action) => UpdateEntryTagsActions.next(action));
+        .do((action) => Actions.next(action));
 
     handleChangeTextarea = (event) => {
         const body = event.target.value;
 
-        UpdateEntryBodyActions.next(makeAction(UPDATE_ENTRY_BODY, {
+        Actions.next(makeAction(UPDATE_ENTRY_BODY, {
             body,
             entry: this.props.entry
         }));
     };
 
     handleClickDate = () => {
-        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     handleClickOutsideCalendar = () => {
-        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     handleSelectDate = (selectedDate) => {
@@ -66,8 +60,8 @@ class EditEntry extends Component {
             return;
         }
 
-        NavigationActions.next(push('/entries/' + selectedDate.format('YYYY-MM-DD')));
-        UIActions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
+        Actions.next(push('/entries/' + selectedDate.format('YYYY-MM-DD')));
+        Actions.next(makeAction(TOGGLE_CALENDAR_VISIBILITY));
     };
 
     render () {
@@ -129,13 +123,7 @@ class EditEntry extends Component {
     }
 }
 
-const EditEntryActions = () => Observable.merge(
-    NavigationActions,
-    UIActions,
-    UpdateEntryBodyActions,
-    UpdateEntryTagsActions,
-    UpdateGlobalTagsActions
-);
+const EditEntryActions = Actions;
 
 export {
     EditEntry,

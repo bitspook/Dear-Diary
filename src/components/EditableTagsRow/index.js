@@ -6,7 +6,7 @@ import {RemovableTag, RemovableTagActions} from '../RemovableTag';
 import {UPDATE_TAGS} from './actionTypes';
 import './style.scss';
 
-const updateTagsActions = new Subject();
+const Actions = new Subject();
 
 @ChildActions(RemovableTagActions)
 class EditableTagsRow extends Component {
@@ -19,7 +19,7 @@ class EditableTagsRow extends Component {
         .do(({tag}) => {
             const remainingTags = props.tags.filter((oldTag) => oldTag !== tag);
 
-            updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: remainingTags}));
+            Actions.next(makeAction(UPDATE_TAGS, {tags: remainingTags}));
         });
 
     handleKeyUp = (event) => {
@@ -37,7 +37,7 @@ class EditableTagsRow extends Component {
                              .concat(tags);
 
         if (keyCode === 13) {
-            updateTagsActions.next(makeAction(UPDATE_TAGS, {tags: newTags}));
+            Actions.next(makeAction(UPDATE_TAGS, {tags: newTags}));
         }
 
         if (keyCode === 13 || keyCode === 27) {
@@ -63,7 +63,7 @@ class EditableTagsRow extends Component {
     }
 }
 
-const EditableTagsRowActions = updateTagsActions;
+const EditableTagsRowActions = Actions;
 
 export {
     EditableTagsRow,

@@ -4,14 +4,14 @@ import makeAction from '../../lib/makeAction';
 import {REMOVE_TAG} from './actionTypes';
 import './style.scss';
 
-const removeTagActions = new Subject();
+const Actions = new Subject();
 
 class RemovableTag extends Component {
     static propTypes = {
         value: PropTypes.string.isRequired
     }
 
-    handleRemoveTag = () => removeTagActions.next(makeAction(REMOVE_TAG, {tag: this.props.value}));
+    handleRemoveTag = () => Actions.next(makeAction(REMOVE_TAG, {tag: this.props.value}));
 
     render () {
         const value = this.props.value;
@@ -27,7 +27,7 @@ class RemovableTag extends Component {
     }
 }
 
-const RemovableTagActions = removeTagActions;
+const RemovableTagActions = Actions;
 
 export {
     RemovableTag,

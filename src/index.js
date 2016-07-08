@@ -14,9 +14,7 @@ import createAppActions from './lib/createAppActions';
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
-const AppActions = createAppActions(
-    EditEntryActions(store.getState)
-);
+const AppActions = createAppActions(EditEntryActions);
 
 AppActions
     .subscribe((action) => {
