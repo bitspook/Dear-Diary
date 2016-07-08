@@ -91,7 +91,7 @@ Edit Entry view covers "New Entry", "Edit Entry" and "Read Entry" roles. This vi
     - Cannot write diary entry for future : When date in url is in future
 *** Browse Entries
 
-*Url :* ~/entries?tags=<tag>~
+*Url :* ~/entries?tag=<tag>~
 
 Browse Entries view contains:
 
@@ -116,10 +116,12 @@ Browse Entries view contains:
 *** Calendar
 
 Calendar view that pops up when user click on date in "Edit Entry" view. Use [[https://github.com/clauderic/react-infinite-calendar][react-infinite-calendar]]
-*** SelectList
+
+*** FilterTagsList
 
 List of selectable items with a search option. Used for "Filter by Tags" column in "Browse Entries" view
-*** TagsRow
+
+*** EditableTagsRow
 :PROPERTIES:
 :ID:       41E370C2-4C5B-4FB9-82B9-053CD463C2A6
 :END:
@@ -135,7 +137,7 @@ List of selectable items with a search option. Used for "Filter by Tags" column 
 - ADD_TAG (tag : String)
 **** Subcomponents
 ***** [[id:D8759C56-3C58-4CB8-9499-E0DEED5C0052][Tag]]
-*** Tag
+*** RemovableTag
 :PROPERTIES:
 :ID:       D8759C56-3C58-4CB8-9499-E0DEED5C0052
 :END:
