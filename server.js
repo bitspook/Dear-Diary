@@ -14,6 +14,7 @@ const bundler = webpack(webpackConfig);
 
 app.use(webpackDevMiddleware(bundler, webpackConfig.devServer));
 app.use(webpackHotMiddleware(bundler));
+app.use(require('morgan')('dev'));
 app.use(require('body-parser').json());
 
 const staticAssetDirectory = path.resolve(__dirname, 'dist');
