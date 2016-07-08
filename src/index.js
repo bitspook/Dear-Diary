@@ -9,13 +9,12 @@ import configureStore from './configureStore';
 import Main from './views/Main';
 import {EditEntry} from './views/EditEntry';
 import {BrowseEntries} from './views/BrowseEntries';
-import createAppActions from './lib/createAppActions';
 import actionCreator from './actionCreators';
 
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);
 
-const AppActions = createAppActions(actionCreator(store.getState));
+const AppActions = actionCreator(store.getState);
 
 AppActions
     .subscribe((action) => {
