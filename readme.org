@@ -1,0 +1,346 @@
+#+AUTHOR: Charanjit Singh (ckhabra@gmail.com)
+
+* Overview
+
+A presentation introducing use of (RxJS) Observable for orchestrating
+the flow of control in React/Redux apps.
+
+* Objective
+
+Main objective of the presentation is to introduce users to RxJS.
+
+* Transcript
+
+#+CAPTION: Introduction
+#+ATTR_HTML: :alt Introduction
+[[./slides/1.png]]
+
+Hello everyone,
+My name is Charanjit Singh. I work as a freelance software developer.
+
+I want to thank everyone for coming here today, it's always great to see like minded people gathered in one place like this. In this talk we're going to play with React app built with Redux principles, and a unique flavour of Observables.
+
+** Buildup
+
+#+CAPTION: Bad news
+#+ATTR_HTML: :alt Bad news
+[[./slides/2.png]]
+
+Some bad news first. Native Observables proposal didn't make it to ES2016 spec. They aren't kicked out either, they're still in stage-1 for consideration, but the final ES2016 spec is out and Observable didn't make to it. ES2016 is a very small release with very little to show for it, so I guess it's not a surprise either. In the meantime, we have RxJS and several other libraries that provide Observable implementations so we won't miss out on a lot of fun.
+
+#+CAPTION: Let's procrastinate
+#+ATTR_HTML: :alt Let's procrastinate
+[[./slides/3.png]]
+
+Before we proceed to what we're actually here for, let's procrastinate. Procrastination is awesome, right? What happen when you procrastinate? Nothing happens, that's the whole point. But I sure feel bad about it. Procrastination is sort of my guilty pleasure. When feeling so bad, the mind start trying to counter it. Start building defenses, to legitimize the actions. Or the lack of actions as in this case. And hence comes the worst part.
+
+#+CAPTION: Existential crisis
+#+ATTR_HTML: :alt Existential crisis
+[[./slides/4.png]]
+
+The mind start questioning the task we're avoiding. "What to do?" become "Why do it?". "Do this task matter?" "Do my job matter?" "Do my life matter?" The ultimate state of stillness. The Limbo.
+
+But leave it. Now that we're procrastinating, let's do it properly. Let's ask the "why"s.
+
+#+CAPTION: Why React? Why Redux? Why Rx?
+#+ATTR_HTML: :alt Why React? Why Redux? Why Rx?
+[[./slides/5.png]]
+
+React, Redux, Rx. Why?
+
+#+CAPTION: Do the tools matter?
+#+ATTR_HTML: :alt Do the tools matter?
+[[./slides/6.png]]
+
+Does it matter which tools we use? What do you think, does it matter?
+
+#+CAPTION: Nail 'n Hammer VS Nail gun
+#+ATTR_HTML: :alt Nail 'n Hammer VS Nail gun
+[[./slides/7.png]]
+
+Let's say there are two carpenters. One uses good 'ol hammer 'n nails, other uses a nail gun.
+
+Carpenter with the nail gun has an obvious advantage. Nail gun help him be so much more productive. So yes, the tools matter. But how do they help us? How can a nail gun help a software engineer? I can already see it speedup some meetings, winning us some arguments. That sure is helpful,
+
+How do our tools help us? Help us with what? What do we do? No really, what do we do? We think. And we press some buttons. Our tools must help us with one of these.
+
+** Thinking in React
+
+#+CAPTION: Thinking in React
+#+ATTR_HTML: :alt Thinking in React
+[[./slides/8.png]]
+
+React brought virtualDOM to us. It fundamentally changed the way we traditionally think about building web apps. It simplified the whole UI part of development, virtually took it out of the equation. We no longer care about how to update the UI, how to keep it in sync with our data.
+
+#+CAPTION: "What?" not "How?"
+#+ATTR_HTML: :alt "What?" not "How?"
+[[./slides/9.png]]
+
+Our app tell React what to render, but not how to do it. We don't tell React how to update our UI, or how parts of UI relate to our data, or to each other. We say "I have this data, and this is the UI I want for it". Simple functional UI. We don't tell it to keep the UI and data in sync, neither do we care about how a user's actions change our view. Ideally, UI is simply a fixed output for some fixed input. User's actions never directly change the UI. "View" is one thing React does very well.
+
+#+CAPTION: Data -> Component -> HTML
+#+ATTR_HTML: :alt Data -> Component -> HTML
+[[./slides/10.png]]
+
+Central piece of the React puzzle is a component. Ideally, we can think of a component as a function, which receive some arguments, and produce output that React can render to HTML.
+Component can contain other smaller components to create more complicated views, but the central idea remain more or less the same. A component is given some input and it produces some output. Always, Same output for same input.
+
+The relation between our UI and our data is one way. There is no relation between different parts of the UI. We don't say that this paragraph must always show whatever the value that input element has. We just tell it "what to render for this kind of input". When the input changes, it's React's job to optimally update the DOM.
+
+This freedom and simplicity lead to a powerful shift in thinking about how we build our apps.
+
+#+CAPTION: Data -> UI -> User events -> ... 
+#+ATTR_HTML: :alt Data -> UI -> User events -> ... 
+[[./slides/11.png]]
+
+This shift in approaching the UI development make the whole process a lot simpler. When building a React app, I usually start with defining the structure of model first. The data that I want the UI created for, because that is the only requirement for creating the UI. Then the user comes into picture, I mean, of course, this is a "User Interface" so it kinda makes sense. User uses the UI and events are created for user's interactions. These events are handled by the app and they result in change in the data that I initially put in my model. Change of data result in update of UI, and the cycle continues.
+
+React took away the most troublesome part of UI development: updating the UI. There is no two-way-binding or any other kind of bookkeeping that we need to care about. It is all pure and simple functions, that we can think with clarity.
+
+#+CAPTION: If only it was true
+#+ATTR_HTML: :alt If only it was true
+[[./slides/12.png]]
+
+Awesome! Right? Well, it would have been awesome, if it was true. Which it is not. Because.
+
+#+CAPTION: State
+#+ATTR_HTML: :alt State
+[[./slides/13.png]]
+
+React try to do a little more than just the view part of UI. React provide a mechanism to keep state in our components. State is data which is not passed to your component as input, so your component's output is no longer fixed. All those goodie-goodie ways of thinking about UI development as pure functions might not apply. Now actually this does not alter the "What not how" equation. Our component still only tell "what to render", or update.
+
+But it affect the very useful way of thinking about React apps.
+
+When we have state in our components, the flow of data changes. State is like a little bit of corruption in the hearts of our components. Data is no longer *flowing* in a single direction. Now there might be puddles of state in child components that might wanna reach back to the parent or other components.
+
+** Thinking in Redux
+
+#+CAPTION: Hello Redux
+#+ATTR_HTML: :alt Hello Redux
+[[./slides/14.png]]
+
+This is where Redux comes into picture. Redux is basically a set of guidelines about how to manage the state. State management is the primary task of Redux. In Redux, we create a store which keeps all the state of our app.
+
+#+CAPTION: Cycle is valid again
+#+ATTR_HTML: :alt Cycle is valid again
+[[./slides/15.png]]
+
+Now our cycle of thought is actually valid. Store keeps the state, and provide parts of it to our components that need it. Component get rendered to UI, user uses UI, creates events which result in changing the state, which change the UI and the cycle continues.
+
+#+CAPTION: Store keep the state in check
+#+ATTR_HTML: :alt Store keep the state in check
+[[./slides/16.png]]
+
+Store keeps the state contained outside our React components. It keep it in check, so it won't leak into our components.
+
+#+CAPTION: Angel of side-effects
+#+ATTR_HTML: :alt Angel of side-effects
+[[./slides/17.png]]
+
+But events created by user must update the state, right? If our component don't have the state, how will they update it? Redux provides a solution for this as well. An angel of, can you guess what? Redux provides an angel of side-effects, we call an "action".
+
+#+CAPTION: Action for side-effects
+#+ATTR_HTML: :alt Action for side-effects
+[[./slides/18.png]]
+
+Actions are simple objects which just tell "what to do". Our component dispatches actions, which are handled by Redux and eventually result in updating the state. Essentially, our components simply say "what to do", not "how to do it".
+
+#+CAPTION: Mental boundary
+#+ATTR_HTML: :alt Mental boundary
+[[./slides/19.png]]
+
+This help creating a very useful mental boundary. Clearly separated concerns here enable us to think of our components as completely independent. They don't need to be aware of state in any way at all. They get their data as props, they dispatch actions to express their intent to do something.
+
+We can think of our state (the model and its manipulation) independent of our views, and we can create our views without concerning ourself with how the state is structured or how it will get affected by user's interactions.
+
+#+CAPTION: What vs how
+#+ATTR_HTML: :alt What vs how
+[[./slides/20.png]]
+
+This "what" vs "how" battle is quite old actually. There is a name for this "kind" of programming if you can guess. "What" vs "how" translates to declarative vs imperative. More and more new frameworks and technologies are making a push towards declarative, and for good reason.
+
+Declarative programming offer many benefits. Separation of concerns, predictability, composability etc.
+
+#+CAPTION: Control flow with callbacks
+#+ATTR_HTML: :alt Control flow with callbacks
+[[./slides/21.png]]
+
+In a Redux app, the data flows downward from store to components and create the view, and the control flows upward using props callbacks. Child component hand the control over to parent and so on till it cause a dispatch-action call.
+
+#+CAPTION: Control flow with Observable
+#+ATTR_HTML: :alt Control flow with Observable
+[[./slides/22.png]]
+
+But what if we make this flow as explicit as the data flow? This is really a non-problem; but, what the hell. Let's reach for our ideal diagram. Components creating two kinds of flows: data and control.
+
+What if we make "What to render" and "What to do", a little too painfully explicit? What if all our components, and the app itself talked in one true language? Can you guess which language would that we?
+
+#+CAPTION: Everything talks in actions
+#+ATTR_HTML: :alt Everything talks in actions
+[[./slides/23.png]]
+
+How about we make a React app without providing any callbacks as props at all? All the components would talk to their parents in terms of actions. Sounds intriguing?
+
+Before we can proceed with how we're going to implement that, we need to discuss the thing that is going to help us achieve that.
+
+** Think Reactive
+
+#+CAPTION: f() <3 Promise
+#+ATTR_HTML: :alt f() <3 Promise
+[[./slides/24.png]]
+
+What happened when a function married a Promise?
+
+#+CAPTION: The hero we need
+#+ATTR_HTML: :alt The hero we need
+[[./slides/25.png]]
+
+The hero we need was born.
+
+#+CAPTION: What is it?
+#+ATTR_HTML: :alt What is it?
+[[./slides/26.png]]
+
+It's a function. It's a Promise. What is it?
+
+#+CAPTION: It's an observable
+#+ATTR_HTML: :alt It's an observable
+[[./slides/27.png]]
+
+It's an Observable.
+
+#+CAPTION: What is an Observable?
+#+ATTR_HTML: :alt What is an Observable?
+[[./slides/28.png]]
+
+So what is an Observable really? Instead of going to the technical definition, which you'll not hear anyway, let's try to understand it by their behavior.
+
+#+CAPTION: Lazy as a function
+#+ATTR_HTML: :alt Lazy as a function
+[[./slides/29.png]]
+
+What happens when you create a function? Well, a function is created. But it's body is not executed. A function's body gets executed only when it's needed, i.e when the function is called. Same goes for Observables. An Observable is just a sitting block of code until it is subscribed to.
+
+Actually it helps a lot if you think of Observable as functions rather than values or promises. It'll save you some hair pulling about why your Observable isn't working as expected even though you've put code in the Observable chain.
+
+What happen when we manipulate a function? By composition or some other way? Generally a new function is created, which does not execute until it is called. Same goes for Observable. When we manipulate an Observable with its operators, a new Observable is created. And even if you subscribe to the original Observable, this new one will just lie around until we subscribe to it explicitly.
+
+And the best feature, we can compose Observables as we do with functions. It's awesome!
+
+#+CAPTION: Temporal as a Promise
+#+ATTR_HTML: :alt Temporal as a Promise
+[[./slides/30.png]]
+
+Just like a Promise, an Observable can (and generally do) get their value(s) in future. Or an error.
+
+#+CAPTION: A collection as an Array
+#+ATTR_HTML: :alt A collection as an Array
+[[./slides/31.png]]
+
+So Observable are like functions, and promises, aaand, arrays. Huh! That Promise was quite promiscuous.
+
+Like Array, an Observable can have multiple values. You can think of an Observable as an asynchronous Array.
+
+Arrays are weird you know. They're like Schrödinger's cat.
+
+#+CAPTION: A function, a promise, and an array
+#+ATTR_HTML: :alt A function, a promise, and an array
+[[./slides/32.png]]
+
+So an Observable is: a function, and a promise, and an array. Pretty cool! Right? And they say nothing good come out of polygamy.
+
+#+CAPTION: How to use Observable?
+#+ATTR_HTML: :alt How to use Observable?
+[[./slides/33.png]]
+
+Now that we have an idea about what an Observable is, let's talk about how to use them. Reactive programming is most commonly used in heavy flow parts of the app. Parts in which data or control flows a lot and need to be manipulated. User interfaces make a very good match for this.
+
+If you know how basic behavior of functions, and basic Array extra usage, and know how to use Promises, you already know how to use Observables.
+
+Using an Observable generally involve 3 steps.
+
+#+CAPTION: Source -> manipulation -> Sink
+#+ATTR_HTML: :alt Source -> manipulation -> Sink
+[[./slides/34.png]]
+
+We create an Observable from some kind of source, we shape-shift it to our liking, and then we consume the result for greater good.
+
+#+CAPTION: Supported Sources
+#+ATTR_HTML: :alt Supported Sources
+[[./slides/35.png]]
+
+Observables support a great variety of sources. We can convert almost anything to an Observable. We can convert normal values to one-off Observables, we can convert arrays and iterators to an observable which emit one value at a time, we can convert Promises to Observable, even callbacks can be converted. Or we can create brand new Observables with our own custom logic.
+
+#+CAPTION: Manipulation with Operators
+#+ATTR_HTML: :alt Manipulation with Operators
+[[./slides/36.png]]
+
+Observables can be manipulated, shaped and shifted, with an API very similar to Arrays. The transformation to/from/between Observables is done by what we call "operators". They are simple functions which are either available on Observable instance or statically on Observable itself. There is a large number of Operators available which provide a great deal of flexibility. In our adventure today, we'll keep ourself limited to some common ones.
+
+#+CAPTION: Sink: subscribe
+#+ATTR_HTML: :alt Sink: subscribe
+[[./slides/37.png]]
+
+And finally, our final resulting Observable go the sink. The last thing in an Observable chain is usually a call to ~subscribe~ function. This call is very important. An Observable stays dormant until we subscribe to it. It's like calling a function.
+
+#+CAPTION: Observer
+#+ATTR_HTML: :alt Observer
+[[./slides/38.png]]
+
+The object we pass to ~subscribe~ call is called an Observer. Observer is a simple plain object with 3 callbacks. ~next~, ~error~, and ~complete~. Observable can emit more than one values, these values arrive in the ~next~ callback. When the Observable is finished and there will be no more values coming through, the ~complete~ callback gets called. If any error occurs anywhere along the Observable chain, the ~error~ callback is called.
+
+#+CAPTION: When Observable stops
+#+ATTR_HTML: :alt When Observable stops
+[[./slides/39.png]]
+
+Now an Observable can be infinite. A subscription to an Observable stays valid until: either we unsubscribe it explicitly, it completes, or if any error occurs anywhere along the Observable chain.
+
+#+CAPTION: Example
+#+ATTR_HTML: :alt Example
+[[./slides/40.png]]
+
+This is pretty basic example. We convert an Array to an Observable with ~Observable.from~, we use some operators to manipulate the Observable, and we eventually subscribe to it and simply log the values to console.
+
+#+CAPTION: Subject
+#+ATTR_HTML: :alt Subject
+[[./slides/41.png]]
+
+That's almost all we need to know about React, Redux and Observables to implement our app today. Only other thing we need to know about is a ~Subject~. Observable and Observer are to Reactive programming like Components are to React. They are important, central pieces. But Observable are immutable. We can only get values from them, not put values in them. But sometime we need a custom source to which we can give values when we want. That is what a Subject is. For now, we can think of a Subject as a mutable Observable.
+
+Phew! That was a lot of talk. In the next section, let's build the app of our dreams!
+
+** The app
+
+#+CAPTION: Let's build an app
+#+ATTR_HTML: :alt Let's build an app
+[[./slides/42.png]]
+
+Please note that this will not be a React or Redux tutorial. We'll be using React/Redux as a medium to learn how to use Observable in a somewhat realistic scenario.
+
+#+CAPTION: App: Dear Diary
+#+ATTR_HTML: :alt App: Dear Diary
+[[./slides/43.png]]
+
+We'll build a very simple Diary writing app. I wanted to use React/Redux as a platform for introducing Observable in this workshop, but real-world apps can get complicated real fast. This app is more of a Todo-ish app. I tried to come up with an app that would have as simple as possible logic of its own so that it would allow us focus on the technologies.
+
+It's going to be a regular React/Redux app, except for one important difference. We're going to use Observables to manage the flow of control in our app. Remember those diagrams we saw before we started discussing Rx?
+
+#+CAPTION: Control flow with Callbacks
+#+ATTR_HTML: :alt Control flow with Callbacks
+[[./slides/44.png]]
+
+Instead of using regular callbacks in props, we're going to make our components export an action emitting Observable, which we'll then manipulate to create the final actions we'll eventually dispatch to Redux store.
+
+#+CAPTION: Control flow with action emitting Observable
+#+ATTR_HTML: :alt Control flow with action emitting Observable
+[[./slides/45.png]]
+
+In each of our components, instead of calling props callbacks, we'll emit an action in an Observable. We'll then export this Observable along with the component itself. Whoever will consume our component will then consume our actions Observable as well. If it's a parent to our component, it will use our observable to create its own actions, if it's a top level component, it'll import it to create app-level dispatch-able actions.
+
+I'd also like to warn you before we proceed for building the app. There is at least one big flaw in the approach we'll be following. I mean a flaw other than those which I'll be telling you along the way. So keep your eyes open and see if you can find it. If you could find it, I'll let you know. If nobody finds it by the end, I'll tell you what it was. But I might lie about it. So watch out for that.
+
+Let's rumble!
+
+#+CAPTION: Control flow with action emitting Observable
+#+ATTR_HTML: :alt Control flow with action emitting Observable
+[[./slides/47.png]]
