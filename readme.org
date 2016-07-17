@@ -1,0 +1,36 @@
+#+BEGIN_QUOTE
+This branch of "Dear Diary" is meant for workshop on an experimental approach to be delivered at JsChannel conference 2016.
+#+END_QUOTE
+
+* Introduction
+
+This is a very simple app which do a very simple thing, "allow user to write her diary entries". You can check the details of the app itself in [[./specs.org][specs.org]]. I chose to build this app for several reasons. I wanted to build an app which is not Todo (for the sake of everything that's worth saving in this world) app, but which would have the simplicity to allow us to focus on technologies we'll use to build the app, and not on the app itself. This app fits the bill. There is very little complexity regarding the app itself, and the technology can have our full attention.
+
+** Main objective
+
+This app is to a React/Redux app, with a twist of (Rx) Observable given a centric but simple role. Centric so we can witness the power Observables can provide us, simple so it will not be too overwhelming to grasp the big picture.
+
+I chose to build React/Redux given their popularity and small API surface(s). Make sure you check the slides for the presentation for a brush up for React/Redux philosophies and how what we're going to do fits  the whole thing.
+
+Ironically, despite having such small API surface, React/Redux have been seen to be a bit overwhelming to newcomers. I think same thing spans to Reactive programming (with Observables) as well. They're quite simple to use, the core API surface is very small, but still they seem overwhelming to a large number of people. The very flexibility and freedom they offer act against them. I've tried to introduce Observable from different fronts, reactive programming, asynchronous programming, consistent bridge between async and sync thinking, and even as [[http://github.com/channikhabra/yarr][control and data flow mechanisms]].
+
+But, every nail today is going to see the Reactive hammer : )
+
+* Setup
+
+Before proceeding with the code, set up the build system. We use webpack as our build system. Check [[./webpack.config.dev.js][./webpack.config.dev.js]] for the complete config. Here is basically what we are doing in the config:
+
+- ES2015 -> ES5 transpilation with babel
+- JSX -> JS conversion with babel
+- Hot code push. We do a very basic setup here. Reloads is not really a problem for small apps, but we'll want to keep the state intact when editing our components.
+- SCSS -> CSS conversion with sass-loader
+
+~src/index.js~ file is our main file. Everything imported in that file will be packaged by webpack, and henceforth.
+
+To start the app, just enter ~npm start~ in the terminal.
+
+* Links
+
+*Presentation Slides*: http://slides.com/channikhabra/react-redux-and-reactive-programming
+
+*Presentation Transcript*: https://github.com/channikhabra/Dear-Diary/tree/presentation
